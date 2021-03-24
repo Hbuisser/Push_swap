@@ -17,44 +17,63 @@ void print_tab(int *tab)
     int i;
 
     i = 0;
-    while (tab[i + 1])
+    printf("+++\n");
+    while (tab && tab[i + 1])
     {
-        printf("%i\n", tab[i]);
+        printf("%d\n", tab[i]);
         i++;
     }
+    printf("+++\n");
+}
+
+int parse_stack(int argc, char **argv, t_data *data)
+{
+    int i;
+    int len;
+
+    i = 0;
+    len = argc - 1;
+    if (!(data->a = malloc(sizeof(int) * len)))
+        return (0);
+    while (i < len)
+    {
+        data->a[i] = ft_atoi(argv[i + 1]);
+        i++;
+    }
+    if (!(data->b = malloc(sizeof(int) * len)))
+        return (0);
+    data->b[0] = 0;
+    data->b[1] = 1;
+    data->b[2] = 2;
+    data->b[3] = 3;
+    return (1);
 }
 
 int main(int argc, char **argv)
 {
     t_data data;
-    int i;
-    int *tab;
-    int len;
     int instruct;
     char *line;
 
-    i = 0;
-    len = argc - 1;
-    tab = malloc(sizeof(int) * len);
     data.line = "";
-    while (i < len)
-    {
-        tab[i] = ft_atoi(argv[i + 1]);
-        i++;
-    }
-    print_tab(tab);
+    parse_stack(argc, argv, &data);
+    //print_tab(data.tab);
     while (1)
     {
         instruct = get_next_line(0, &line);
         data.line = ft_strjoin(data.line, line);
+        data.line = ft_strjoin(data.line, "\n");
         free(line);
         line = NULL;
         if (instruct == 0)
         {
-            printf("instruct: %s|\n", data.line);
-            write(1, "OK\n", 3);
-            return (0);
+            printf("___\ninstruct:\n%s", data.line);
+            printf("OK\n___\n");
+            break ;
         }
     }
+    sa(&data);
+    sb(&data);
+    //print_tab(data.a);
     return (0);
 }

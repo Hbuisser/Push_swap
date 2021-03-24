@@ -26,6 +26,19 @@
 typedef struct  s_data
 {
     char        *line;
+    int			*a;
+	int 		*b;
 }               t_data;
+
+/*
+*** INSTRUCTIONS
+*/
+
+void sa(t_data *data);
+void sb(t_data *data);
+void ss(t_data *data);
+void pa(t_data *data);
+void pb(t_data *data);
+
 
 #endif
