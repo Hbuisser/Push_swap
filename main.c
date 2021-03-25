@@ -12,13 +12,11 @@
 
 #include "include/push_swap.h"
 
-int		check_digit(int argc, char **argv)
+int		check_digit(int argc, char **argv, int i)
 {
-	int		i;
 	int		j;
-	i = 1;
-	j = 0;
 
+	j = 0;
 	while (i < argc)
 	{
 		while (argv[i][j])
@@ -33,21 +31,62 @@ int		check_digit(int argc, char **argv)
 	return (0);
 }
 
-void print_tab(int *tab, t_data *data)
+int debug(t_data *data)
 {
     int i;
 
-    i = data->init_len;
-    printf("+++\n");
-    while (i > 0)
+    i = 0;
+    while (i < data->len_a)
     {
-        printf("%i\n", tab[i]);
-        i--;
+        printf("a[%i]: %i\n", i, data->a[i]);
+        i++;
     }
-    printf("+++\n");
+    i = 0;
+    while (i < data->len_b)
+    {
+        printf("b[%i]: %i\n", i, data->b[i]);
+        i++;
+    }
+    return (0);
 }
 
-int parse_stack(char **argv, t_data *data)
+int exec_instruct(t_data *data)
+{
+    int i;
+    char **instruct;
+
+    instruct = ft_split(data->line, '\n');
+    i = 0;
+    while (instruct && instruct[i])
+    {
+        if (!ft_strncmp(instruct[i], "sa", 2))
+            sa(data);
+        else if (!ft_strncmp(instruct[i], "sb", 2))
+            sb(data);
+        else if (!ft_strncmp(instruct[i], "ss", 2))
+            ss(data);
+        else if (!ft_strncmp(instruct[i], "pa", 2))
+            pa(data);
+        else if (!ft_strncmp(instruct[i], "pb", 2))
+            pb(data);
+        else if (!ft_strncmp(instruct[i], "ra", 2))
+            ra(data);
+        else if (!ft_strncmp(instruct[i], "rb", 2))
+            rb(data);
+        else if (!ft_strncmp(instruct[i], "rr", 2))
+            rr(data);
+        else if (!ft_strncmp(instruct[i], "rra", 3))
+            rra(data);
+        else if (!ft_strncmp(instruct[i], "rrb", 3))
+            rrb(data);
+        else if (!ft_strncmp(instruct[i], "rrr", 3))
+            rrr(data);
+        i++;
+    }
+    return (1);
+}
+
+int parse_stack(char **argv, t_data *data, int j)
 {
     int i;
 
@@ -56,24 +95,18 @@ int parse_stack(char **argv, t_data *data)
         return (0);
     while (i < data->init_len)
     {
-        data->a[i] = ft_atoi(argv[i + 1]);
+        data->a[i] = ft_atoi(argv[j]);
         i++;
+        j++;
     }
-    //print_tab(data->a, data);
     if (!(data->b = (int *)malloc(sizeof(int) * data->init_len)))
         return (0);
-    data->b[0] = 3;
-    data->b[1] = 2;
-    data->b[2] = 1;
-    data->b[3] = 6;
-    data->len_b = 4;
     return (1);
 }
 
-void init_struct(t_data *data, int argc)
+void init_struct(t_data *data)
 {
     data->line = "";
-    data->init_len = argc - 1;
     data->len_a = data->init_len;
     data->len_b = 0;
 }
@@ -83,10 +116,19 @@ int main(int argc, char **argv)
     t_data data;
     int instruct;
     char *line;
+    int i;
 
-    init_struct(&data, argc);
-    parse_stack(argv, &data);
-    //print_tab(data.tab, data);
+    i = 1;
+    data.init_len = argc - 1;
+    if (!ft_strncmp(argv[1], "-v", 2))
+    {
+        i = 2;
+        data.init_len -= 1;
+    }
+    init_struct(&data);
+    if (check_digit(argc, argv, i) < 0)
+        return (0); 
+    parse_stack(argv, &data, i);
     while (1)
     {
         instruct = get_next_line(0, &line);
@@ -95,40 +137,10 @@ int main(int argc, char **argv)
         free(line);
         line = NULL;
         if (instruct == 0)
-        {
-            printf("___\ninstruct:\n%s", data.line);
-            printf("OK\n___\n");
             break ;
-        }
     }
-    //sa(&data);
-    //sb(&data);
-    //ss(&data);
-    // printf("a[0]: %i\n", data.a[0]);
-    // printf("a[1]: %i\n", data.a[1]);
-    // printf("a[2]: %i\n", data.a[2]);
-    // printf("a[3]: %i\n", data.a[3]);
-    // printf("a[4]: %i\n", data.a[4]);
-    // printf("a[5]: %i\n", data.a[5]);
-    // printf("a[6]: %i\n", data.a[6]);
-    // printf("------\n");
-    // printf("b[0]: %i\n", data.b[0]);
-    // printf("b[1]: %i\n", data.b[1]);
-    // printf("b[2]: %i\n", data.b[2]);
-    // printf("b[3]: %i\n", data.b[3]);
-    // printf("------------------\n");
-    // pa(&data);
-    // pa(&data);
-    // pa(&data);
-    // pb(&data);
-    // pb(&data);
-    // pb(&data);
-    //ra(&data);
-    //rb(&data);
-    //rr(&data);
-    //rra(&data);
-    //rrb(&data);
-    rrr(&data);
-    //print_tab(data.a);
+    exec_instruct(&data);
+    if (!ft_strncmp(argv[1], "-v", 2))
+        debug(&data);
     return (0);
 }

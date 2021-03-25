@@ -56,12 +56,12 @@ void ss(t_data *data)
 {
     sa(data);
     sb(data);
-    printf("a[0]: %i\n", data->a[0]);
-    printf("a[1]: %i\n", data->a[1]);
-    printf("a[2]: %i\n", data->a[2]);
-    printf("b[0]: %i\n", data->b[0]);
-    printf("b[1]: %i\n", data->b[1]);
-    printf("b[2]: %i\n", data->b[2]);
+    // printf("a[0]: %i\n", data->a[0]);
+    // printf("a[1]: %i\n", data->a[1]);
+    // printf("a[2]: %i\n", data->a[2]);
+    // printf("b[0]: %i\n", data->b[0]);
+    // printf("b[1]: %i\n", data->b[1]);
+    // printf("b[2]: %i\n", data->b[2]);
 }
 
 /*
