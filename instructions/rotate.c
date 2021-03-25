@@ -38,10 +38,6 @@ int ra(t_data *data)
         i--;
     }
     free(tmp);
-    // printf("a[0]: %i\n", data->a[0]);
-    // printf("a[1]: %i\n", data->a[1]);
-    // printf("a[2]: %i\n", data->a[2]);
-    // printf("a[3]: %i\n", data->a[3]);
     return (1);
 }
 
@@ -71,10 +67,6 @@ int rb(t_data *data)
         i--;
     }
     free(tmp);
-    // printf("b[0]: %i\n", data->b[0]);
-    // printf("b[1]: %i\n", data->b[1]);
-    // printf("b[2]: %i\n", data->b[2]);
-    // printf("b[3]: %i\n", data->b[3]);
     return (1);
 }
 
@@ -86,11 +78,5 @@ int rr(t_data *data)
 {
     ra(data);
     rb(data);
-    // printf("a[0]: %i\n", data->a[0]);
-    // printf("a[1]: %i\n", data->a[1]);
-    // printf("a[2]: %i\n", data->a[2]);
-    // printf("b[0]: %i\n", data->b[0]);
-    // printf("b[1]: %i\n", data->b[1]);
-    // printf("b[2]: %i\n", data->b[2]);
     return (1);
 }
