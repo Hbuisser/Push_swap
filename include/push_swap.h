@@ -42,6 +42,11 @@ void sb(t_data *data);
 void ss(t_data *data);
 int pa(t_data *data);
 int pb(t_data *data);
-
+int ra(t_data *data);
+int rb(t_data *data);
+int rr(t_data *data);
+int rra(t_data *data);
+int rrb(t_data *data);
+int rrr(t_data *data);
 
 #endif

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   swap.c                                             :+:      :+:    :+:   */
+/*   swap_and_push.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hbuisser <hbuisser@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -25,9 +25,9 @@ void sa(t_data *data)
     swap_up = data->a[1];
     data->a[0] = swap_up;
     data->a[1] = swap_down;
-    printf("a[0]: %i\n", data->a[0]);
-    printf("a[1]: %i\n", data->a[1]);
-    printf("a[2]: %i\n", data->a[2]);
+    // printf("a[0]: %i\n", data->a[0]);
+    // printf("a[1]: %i\n", data->a[1]);
+    // printf("a[2]: %i\n", data->a[2]);
 }
 
 /*
@@ -43,9 +43,9 @@ void sb(t_data *data)
     swap_up = data->b[1];
     data->b[0] = swap_up;
     data->b[1] = swap_down;
-    printf("b[0]: %i\n", data->b[0]);
-    printf("b[1]: %i\n", data->b[1]);
-    printf("b[2]: %i\n", data->b[2]);
+    // printf("b[0]: %i\n", data->b[0]);
+    // printf("b[1]: %i\n", data->b[1]);
+    // printf("b[2]: %i\n", data->b[2]);
 }
 
 /*
@@ -54,24 +54,14 @@ void sb(t_data *data)
 
 void ss(t_data *data)
 {
-    int swap_down;
-    int swap_up;
-
-    swap_down = data->a[0];
-    swap_up = data->a[1];
-    data->a[0] = swap_up;
-    data->a[1] = swap_down;
-    swap_down = data->b[0];
-    swap_up = data->b[1];
-    data->b[0] = swap_up;
-    data->b[1] = swap_down;
+    sa(data);
+    sb(data);
     printf("a[0]: %i\n", data->a[0]);
     printf("a[1]: %i\n", data->a[1]);
     printf("a[2]: %i\n", data->a[2]);
     printf("b[0]: %i\n", data->b[0]);
     printf("b[1]: %i\n", data->b[1]);
     printf("b[2]: %i\n", data->b[2]);
-
 }
 
 /*

@@ -65,7 +65,7 @@ int parse_stack(char **argv, t_data *data)
     data->b[0] = 3;
     data->b[1] = 2;
     data->b[2] = 1;
-    data->b[3] = 0;
+    data->b[3] = 6;
     data->len_b = 4;
     return (1);
 }
@@ -123,6 +123,12 @@ int main(int argc, char **argv)
     // pb(&data);
     // pb(&data);
     // pb(&data);
+    //ra(&data);
+    //rb(&data);
+    //rr(&data);
+    //rra(&data);
+    //rrb(&data);
+    rrr(&data);
     //print_tab(data.a);
     return (0);
 }

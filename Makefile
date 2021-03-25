@@ -12,6 +12,8 @@
 
 SRCS = main.c \
 	instructions/swap_and_push.c \
+	instructions/rotate.c \
+	instructions/reverse.c \
 		
 OBJS = $(SRCS:%.c=%.o)
 
