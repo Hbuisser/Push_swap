@@ -21,15 +21,10 @@ void sa(t_data *data)
     int swap_down;
     int swap_up;
 
-    //if (data->a[0] && data->a[1])
-    //{
-        swap_down = data->a[0];
-        swap_up = data->a[1];
-        data->a[0] = swap_up;
-        data->a[1] = swap_down;
-    //}
-    //else
-      //  printf("A stack is empty\n");
+    swap_down = data->a[0];
+    swap_up = data->a[1];
+    data->a[0] = swap_up;
+    data->a[1] = swap_down;
     printf("a[0]: %i\n", data->a[0]);
     printf("a[1]: %i\n", data->a[1]);
     printf("a[2]: %i\n", data->a[2]);
@@ -44,15 +39,10 @@ void sb(t_data *data)
     int swap_down;
     int swap_up;
 
-    //if (data->b[0] && data->b[1])
-    //{
-        swap_down = data->b[0];
-        swap_up = data->b[1];
-        data->b[0] = swap_up;
-        data->b[1] = swap_down;
-    //}
-    //else
-      //  printf("B stack is empty\n");
+    swap_down = data->b[0];
+    swap_up = data->b[1];
+    data->b[0] = swap_up;
+    data->b[1] = swap_down;
     printf("b[0]: %i\n", data->b[0]);
     printf("b[1]: %i\n", data->b[1]);
     printf("b[2]: %i\n", data->b[2]);
@@ -67,79 +57,132 @@ void ss(t_data *data)
     int swap_down;
     int swap_up;
 
-    //if (data->a[0] && data->a[1] && data->b[0] && data->b[1])
-    //{
-        swap_down = data->a[0];
-        swap_up = data->a[1];
-        data->a[0] = swap_up;
-        data->a[1] = swap_down;
-        swap_down = data->b[0];
-        swap_up = data->b[1];
-        data->b[0] = swap_up;
-        data->b[1] = swap_down;
-    //}
-    //else
-      //  printf("A or B stack is empty\n");
+    swap_down = data->a[0];
+    swap_up = data->a[1];
+    data->a[0] = swap_up;
+    data->a[1] = swap_down;
+    swap_down = data->b[0];
+    swap_up = data->b[1];
+    data->b[0] = swap_up;
+    data->b[1] = swap_down;
+    printf("a[0]: %i\n", data->a[0]);
+    printf("a[1]: %i\n", data->a[1]);
+    printf("a[2]: %i\n", data->a[2]);
+    printf("b[0]: %i\n", data->b[0]);
+    printf("b[1]: %i\n", data->b[1]);
+    printf("b[2]: %i\n", data->b[2]);
+
 }
 
 /*
-*** pa : push a - take the first element at the top of b and put it at the top of a. Do nothing if b is empty.
+*** pa : push a - take the first element at the top of b and put it at the top of a. 
+*** Do nothing if b is empty.
 */
 
-void pa(t_data *data)
+int pa(t_data *data)
 {
     int i;
-    int first;
+    int j;
+    int k;
+    int *tmp;
 
+    data->len_a += 1;
+    j = data->len_a;
+    k = data->len_b;
+    if (!(tmp= (int *)malloc(sizeof(int) * data->len_a - 1)))
+        return (0);
     i = 0;
-    if (data->b[0])
+    while (i < data->len_a)
     {
-        while (data->b && data->b[i])
-        {
-            if (ft_isdigit(data->b[i]))
-                i++;
-        }
-        first = data->b[i];
-        //data->b[i] = NULL;
-        i = 0;
-        while (data->a && data->a[i])
-        {
-            if (ft_isdigit(data->a[i]))
-                i++;
-        }
-        data->a[i] = first;
+        tmp[i] = data->a[i];
+        i++;
     }
-    else
-        printf("B stack is empty\n");
+    i = 1;
+    data->a[0] = data->b[0];
+    while (i < j)
+    {
+        data->a[i] = tmp[i - 1];
+        i++;
+    }
+    free(tmp);
+    i = 0;
+    while (i < k)
+    {
+        data->b[i] = data->b[i + 1];
+        i++;
+    }
+    data->len_b -= 1;
+    // printf("a[0]: %i\n", data->a[0]);
+    // printf("a[1]: %i\n", data->a[1]);
+    // printf("a[2]: %i\n", data->a[2]);
+    // printf("a[3]: %i\n", data->a[3]);
+    // printf("a[4]: %i\n", data->a[4]);
+    // printf("a[5]: %i\n", data->a[5]);
+    // printf("a[6]: %i\n", data->a[6]);
+    // printf("------\n");
+    // printf("b[0]: %i\n", data->b[0]);
+    // printf("b[1]: %i\n", data->b[1]);
+    // printf("b[2]: %i\n", data->b[2]);
+    // printf("b[3]: %i\n", data->b[3]);
+    // printf("b[4]: %i\n", data->b[4]);
+    // printf("b[5]: %i\n", data->b[5]);
+    // printf("------------------\n");
+    return (1);
 }
 
 /*
-*** pb : push b - take the first element at the top of a and put it at the top of b. Do nothing if a is empty.
+*** pb : push b - take the first element at the top of a and put it at the top of b. 
+*** Do nothing if a is empty.
 */
 
-void pb(t_data *data)
+int pb(t_data *data)
 {
     int i;
-    int first;
+    int j;
+    int k;
+    int *tmp;
 
+    data->len_b += 1;
+    j = data->len_b;
+    k = data->len_a;
+    if (!(tmp= (int *)malloc(sizeof(int) * data->len_b - 1)))
+        return (0);
     i = 0;
-    if (data->a[0])
+    while (i < data->len_b)
     {
-        while (data->a && data->a[i])
-        {
-            if (ft_isdigit(data->a[i]))
-                i++;
-        }
-        first = data->a[i];
-        //data->a[i] = NULL;
-        i = 0;
-        while (data->b && data->b[i])
-        {
-            if (ft_isdigit(data->b[i]))
-                i++;
-        }
-        data->b[i] = first;
+        tmp[i] = data->b[i];
+        i++;
     }
-    else
-        printf("B stack is empty\n");
+    i = 1;
+    data->b[0] = data->a[0];
+    while (i < j)
+    {
+        data->b[i] = tmp[i - 1];
+        i++;
+    }
+    free(tmp);
+    i = 0;
+    while (i < k)
+    {
+        data->a[i] = data->a[i + 1];
+        i++;
+    }
+    data->len_a -= 1;
+    // printf("a[0]: %i\n", data->a[0]);
+    // printf("a[1]: %i\n", data->a[1]);
+    // printf("a[2]: %i\n", data->a[2]);
+    // printf("a[3]: %i\n", data->a[3]);
+    // printf("a[4]: %i\n", data->a[4]);
+    // printf("a[5]: %i\n", data->a[5]);
+    // printf("a[6]: %i\n", data->a[6]);
+    // printf("------\n");
+    // printf("b[0]: %i\n", data->b[0]);
+    // printf("b[1]: %i\n", data->b[1]);
+    // printf("b[2]: %i\n", data->b[2]);
+    // printf("b[3]: %i\n", data->b[3]);
+    // printf("b[4]: %i\n", data->b[4]);
+    // printf("b[5]: %i\n", data->b[5]);
+    // printf("b[6]: %i\n", data->b[6]);
+    // printf("------------------\n");
+    return (1);
 }

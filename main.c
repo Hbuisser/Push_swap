@@ -12,41 +12,70 @@
 
 #include "include/push_swap.h"
 
-void print_tab(int *tab)
+int		check_digit(int argc, char **argv)
+{
+	int		i;
+	int		j;
+	i = 1;
+	j = 0;
+
+	while (i < argc)
+	{
+		while (argv[i][j])
+		{
+			if (!ft_isdigit(argv[i][j]))
+				return (-1);
+			j++;
+		}
+		j = 0;
+		i++;
+	}
+	return (0);
+}
+
+void print_tab(int *tab, t_data *data)
 {
     int i;
 
-    i = 0;
+    i = data->init_len;
     printf("+++\n");
-    while (tab && tab[i + 1])
+    while (i > 0)
     {
-        printf("%d\n", tab[i]);
-        i++;
+        printf("%i\n", tab[i]);
+        i--;
     }
     printf("+++\n");
 }
 
-int parse_stack(int argc, char **argv, t_data *data)
+int parse_stack(char **argv, t_data *data)
 {
     int i;
-    int len;
 
     i = 0;
-    len = argc - 1;
-    if (!(data->a = malloc(sizeof(int) * len)))
+    if (!(data->a = (int *)malloc(sizeof(int) * data->init_len)))
         return (0);
-    while (i < len)
+    while (i < data->init_len)
     {
         data->a[i] = ft_atoi(argv[i + 1]);
         i++;
     }
-    if (!(data->b = malloc(sizeof(int) * len)))
+    //print_tab(data->a, data);
+    if (!(data->b = (int *)malloc(sizeof(int) * data->init_len)))
         return (0);
-    data->b[0] = 0;
-    data->b[1] = 1;
-    data->b[2] = 2;
-    data->b[3] = 3;
+    data->b[0] = 3;
+    data->b[1] = 2;
+    data->b[2] = 1;
+    data->b[3] = 0;
+    data->len_b = 4;
     return (1);
+}
+
+void init_struct(t_data *data, int argc)
+{
+    data->line = "";
+    data->init_len = argc - 1;
+    data->len_a = data->init_len;
+    data->len_b = 0;
 }
 
 int main(int argc, char **argv)
@@ -55,9 +84,9 @@ int main(int argc, char **argv)
     int instruct;
     char *line;
 
-    data.line = "";
-    parse_stack(argc, argv, &data);
-    //print_tab(data.tab);
+    init_struct(&data, argc);
+    parse_stack(argv, &data);
+    //print_tab(data.tab, data);
     while (1)
     {
         instruct = get_next_line(0, &line);
@@ -72,8 +101,28 @@ int main(int argc, char **argv)
             break ;
         }
     }
-    sa(&data);
-    sb(&data);
+    //sa(&data);
+    //sb(&data);
+    //ss(&data);
+    // printf("a[0]: %i\n", data.a[0]);
+    // printf("a[1]: %i\n", data.a[1]);
+    // printf("a[2]: %i\n", data.a[2]);
+    // printf("a[3]: %i\n", data.a[3]);
+    // printf("a[4]: %i\n", data.a[4]);
+    // printf("a[5]: %i\n", data.a[5]);
+    // printf("a[6]: %i\n", data.a[6]);
+    // printf("------\n");
+    // printf("b[0]: %i\n", data.b[0]);
+    // printf("b[1]: %i\n", data.b[1]);
+    // printf("b[2]: %i\n", data.b[2]);
+    // printf("b[3]: %i\n", data.b[3]);
+    // printf("------------------\n");
+    // pa(&data);
+    // pa(&data);
+    // pa(&data);
+    // pb(&data);
+    // pb(&data);
+    // pb(&data);
     //print_tab(data.a);
     return (0);
 }

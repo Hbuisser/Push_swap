@@ -25,6 +25,9 @@
 
 typedef struct  s_data
 {
+    int         init_len;
+    int         len_a;
+    int         len_b;
     char        *line;
     int			*a;
 	int 		*b;
@@ -37,8 +40,8 @@ typedef struct  s_data
 void sa(t_data *data);
 void sb(t_data *data);
 void ss(t_data *data);
-void pa(t_data *data);
-void pb(t_data *data);
+int pa(t_data *data);
+int pb(t_data *data);
 
 
 #endif
