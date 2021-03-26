@@ -55,6 +55,7 @@ int parse_stack(char **argv, t_data *data, int j)
     int i;
 
     i = 0;
+    data->len_a = data->init_len;
     if (!(data->a = (int *)malloc(sizeof(int) * data->init_len)))
         return (0);
     while (i < data->init_len)
@@ -71,9 +72,11 @@ int parse_stack(char **argv, t_data *data, int j)
 void init_struct(t_data *data, int argc, char **argv)
 {
     data->line = "";
+    data->string_bool = 0;
+    data->nb_chunk = 0;
     data->init_len = argc - 1;
     if (!ft_strncmp(argv[1], "-v", 2))
         data->init_len -= 1;
-    data->len_a = data->init_len;
+    //data->len_a = data->init_len;
     data->len_b = 0;
 }

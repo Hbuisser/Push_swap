@@ -31,6 +31,8 @@ typedef struct  s_data
     char        *line;
     int			*a;
 	int 		*b;
+    int         string_bool;
+    int         nb_chunk;
 }               t_data;
 
 /*

@@ -38,7 +38,8 @@ $(NAME_PUSH): $(OBJS_PUSH) $(LIBFT)
 	gcc $(CFLAGS) -o $(NAME_PUSH) $(OBJS_PUSH) $(LIBFT)
 
 clean:		
-	rm -rf $(OBJS)
+	rm -rf $(OBJS_CHECKER)
+	rm -rf $(OBJS_PUSH)
 	cd utils/libft/ && make $@
 
 fclean:	clean

@@ -39,6 +39,7 @@ int main(int argc, char **argv)
         return (0);
     }
     parse_stack(argv, &data, i);
+    //data.nb_chunk = get_nbr_chunck()
     if (!ft_strncmp(argv[1], "-v", 2))
         debug(&data);
     return (1);
