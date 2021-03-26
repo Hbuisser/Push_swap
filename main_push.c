@@ -52,11 +52,12 @@ int main(int argc, char **argv)
             return (-1);
         }
     }
-    if (data.len_a < 5)
+    if (already_in_order(&data) > 0)
+        return (1);
+    if (data.len_a < 6)
         small_bash(&data);
     else
         data.nb_chunk = get_nbr_chunck(data.len_a);
-
     if (!ft_strncmp(argv[1], "-v", 2))
         debug(&data);
     return (1);

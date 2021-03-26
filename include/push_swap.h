@@ -50,6 +50,7 @@ int debug(t_data *data);
 */
 
 int small_bash(t_data * data);
+int already_in_order(t_data *data);
 
 /*
 *** INSTRUCTIONS

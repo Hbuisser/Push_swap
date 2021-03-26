@@ -21,6 +21,9 @@ OBJS_CHECKER = $(SRCS_CHECKER:%.c=%.o)
 SRCS_PUSH = main_push.c \
 	utils.c \
 	hard.c \
+	instructions/swap_and_push.c \
+	instructions/rotate.c \
+	instructions/reverse.c \
 		
 OBJS_PUSH = $(SRCS_PUSH:%.c=%.o)
 
