@@ -34,6 +34,15 @@ typedef struct  s_data
 }               t_data;
 
 /*
+*** UTILS
+*/
+
+void init_struct(t_data *data, int argc, char **argv);
+int parse_stack(char **argv, t_data *data, int j);
+int	check_digit(int argc, char **argv, int i);
+int debug(t_data *data);
+
+/*
 *** INSTRUCTIONS
 */
 
