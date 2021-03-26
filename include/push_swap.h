@@ -31,9 +31,11 @@ typedef struct  s_data
     char        *line;
     int			*a;
 	int 		*b;
+    int         *chunk_step;
     int         string_bool;
     int         nb_chunk;
     int         len_chunk;
+    int         *sorted_arr;
 }               t_data;
 
 /*
@@ -52,6 +54,14 @@ int debug(t_data *data);
 
 int small_bash(t_data * data);
 int already_in_order(t_data *data);
+
+/*
+*** ALGO PUSH
+*/
+
+int main_algo(t_data *data);
+int compare_unsorted_and_sorted(t_data *data);
+int first_chunk_push(t_data *data);
 
 /*
 *** INSTRUCTIONS
