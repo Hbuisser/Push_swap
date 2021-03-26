@@ -109,6 +109,7 @@ void init_struct(t_data *data, int argc, char **argv)
     data->line = "";
     data->string_bool = 0;
     data->nb_chunk = 0;
+    data->len_chunk = 0;
     data->init_len = argc - 1;
     if (!ft_strncmp(argv[1], "-v", 2))
         data->init_len -= 1;

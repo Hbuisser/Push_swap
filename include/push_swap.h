@@ -33,6 +33,7 @@ typedef struct  s_data
 	int 		*b;
     int         string_bool;
     int         nb_chunk;
+    int         len_chunk;
 }               t_data;
 
 /*

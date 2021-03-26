@@ -12,24 +12,24 @@
 
 #include "include/push_swap.h"
 
-int hard_2_stack_b(t_data *data)
-{
-    int swap_down;
-    int swap_up;
+// int hard_2_stack_b(t_data *data)
+// {
+//     int swap_down;
+//     int swap_up;
 
-    if (data->len_b > 1)
-    {
-        if (data->b[0] > data->b[1])
-        {
-            swap_down = data->b[0];
-            swap_up = data->b[1];
-            data->b[0] = swap_up;
-            data->b[1] = swap_down;
-            write(1, "sa\n", 3);
-        }
-    }
-    return (1);
-}
+//     if (data->len_b > 1)
+//     {
+//         if (data->b[0] > data->b[1])
+//         {
+//             swap_down = data->b[0];
+//             swap_up = data->b[1];
+//             data->b[0] = swap_up;
+//             data->b[1] = swap_down;
+//             write(1, "sa\n", 3);
+//         }
+//     }
+//     return (1);
+// }
 
 int hard_2(t_data *data)
 {

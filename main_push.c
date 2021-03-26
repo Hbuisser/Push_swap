@@ -12,6 +12,56 @@
 
 #include "include/push_swap.h"
 
+void printArray(int *arr, int size)
+{
+    int i;
+
+    for (i = 0; i < size; i++)
+        printf("%d ", arr[i]);
+    printf("\n");
+}
+
+int make_chunk_array(t_data *data, int *sorted_arr, int len)
+{
+    int *new_chunk;
+    int i;
+
+    if (!(new_chunk = (int *)malloc(sizeof(int) * data->len_chunk)))
+        return (0);
+    i = 0;
+    while (i < data->len_chunk)
+    {
+        new_chunk[i] = sorted_arr[len];
+        len++;
+        i++;
+    }
+    printArray(new_chunk, data->len_chunk);
+    return (0);
+}
+
+int     create_chunk(t_data *data, int *sorted_arr)
+{
+    int len;
+    int mod;
+    int i;
+    int j;
+
+    data->len_chunk = data->len_a / data->nb_chunk;
+    len = data->len_a / data->nb_chunk;
+    mod = data->len_a % data->nb_chunk;
+    //printf("mod%i\n", mod);
+    //printf("lena%i\n", data->len_a);
+    i = 0;
+    j = 0;
+    while (i < data->nb_chunk)
+    {
+        make_chunk_array(data, sorted_arr, j);
+        j = j + len;
+        i++;
+    }
+    return (1);
+}
+
 int     get_nbr_chunck(int size)
 {
     if (size < 99)
@@ -20,6 +70,58 @@ int     get_nbr_chunck(int size)
         return (6);
     else
         return (11);
+}
+
+void swap(int *xp, int *yp)
+{
+    int tmp = *xp;
+
+    *xp = *yp;
+    *yp = tmp;
+}
+
+int *get_sorted_array(int *arr, int n)
+{
+    int i;
+    int j;
+    int min;
+    int *tmp_arr;
+ 
+    if (!(tmp_arr = (int *)malloc(sizeof(int) * n)))
+        return (0);
+    i = 0;
+    while (i < n)
+    {
+        tmp_arr[i] = arr[i];
+        i++;
+    }
+    i = 0;
+    while (i < n - 1)
+    {
+        min = i;
+        j = i + 1;
+        while (j < n)
+        {    
+            if (tmp_arr[j] < tmp_arr[min])
+                min = j;
+            j++;
+        }    
+        swap(&tmp_arr[min], &tmp_arr[i]);
+        i++;
+    }
+    return (tmp_arr);
+}
+
+int main_algo(t_data *data)
+{
+    int *sorted_arr;
+
+    data->nb_chunk = get_nbr_chunck(data->len_a);
+    sorted_arr = get_sorted_array(data->a, data->len_a);
+    printArray(sorted_arr, data->len_a);
+    create_chunk(data, sorted_arr);
+    free(sorted_arr);
+    return (0);
 }
 
 int main(int argc, char **argv)
@@ -57,7 +159,7 @@ int main(int argc, char **argv)
     if (data.len_a < 6)
         small_bash(&data);
     else
-        data.nb_chunk = get_nbr_chunck(data.len_a);
+        main_algo(&data);
     if (!ft_strncmp(argv[1], "-v", 2))
         debug(&data);
     return (1);
