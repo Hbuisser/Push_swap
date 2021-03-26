@@ -69,6 +69,41 @@ int parse_stack(char **argv, t_data *data, int j)
     return (1);
 }
 
+int     ft_parse_string(t_data *data, char **argv, int i)
+{
+    int j;
+    int len;
+    char    **tab;
+
+    data->string_bool = 1;
+    tab = ft_split(argv[i], ' ');
+    j = 0;
+    len = 0;
+    while (argv[i][j])
+    {
+        if (argv[i][j] == ' ')
+            len++;
+        j++;
+    }
+    len++;
+    data->len_a = len;
+    if (!(data->a = (int *)malloc(sizeof(int) * len)))
+        return (0);
+    i = 0;
+    while (i < data->len_a)
+    {
+        data->a[i] = ft_atoi(tab[i]);
+        i++;
+    }
+    i = 0;
+    if (check_digit(len, tab, i))
+    {
+        write(1, "Error\n", 6);
+        return (-1);
+    }
+    return (0);
+}
+
 void init_struct(t_data *data, int argc, char **argv)
 {
     data->line = "";
@@ -77,6 +112,5 @@ void init_struct(t_data *data, int argc, char **argv)
     data->init_len = argc - 1;
     if (!ft_strncmp(argv[1], "-v", 2))
         data->init_len -= 1;
-    //data->len_a = data->init_len;
     data->len_b = 0;
 }

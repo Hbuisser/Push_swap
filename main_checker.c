@@ -71,35 +71,6 @@ int exec_instruct(t_data *data)
     return (1);
 }
 
-int     ft_parse_string(t_data *data, char **argv, int i)
-{
-    int j;
-    int len;
-    char    **tab;
-
-    data->string_bool = 1;
-    tab = ft_split(argv[i], ' ');
-    j = 0;
-    len = 0;
-    while (argv[i][j])
-    {
-        if (argv[i][j] == ' ')
-            len++;
-        j++;
-    }
-    len++;
-    data->len_a = len;
-    if (!(data->a = (int *)malloc(sizeof(int) * len)))
-        return (0);
-    i = 0;
-    while (i < data->len_a)
-    {
-        data->a[i] = ft_atoi(tab[i]);
-        i++;
-    }
-    return (0);
-}
-
 int main(int argc, char **argv)
 {
     t_data data;
@@ -118,17 +89,20 @@ int main(int argc, char **argv)
     while (argv[i][j])
     {
         if (argv[i][j] == ' ')
-            ft_parse_string(&data, argv, i);
+            if (ft_parse_string(&data, argv, i) < 0)
+                return (0);
         j++;
     }
     j = 0;
-    // if (check_digit(argc, argv, i))
-    // {
-    //     write(1, "Error\n", 6);
-    //     return (-1);
-    // }
     if (data.string_bool < 1)
+    {
         parse_stack(argv, &data, i);
+        if (check_digit(argc, argv, i))
+        {
+            write(1, "Error\n", 6);
+            return (-1);
+        }
+    }
     while (1)
     {
         instruct = get_next_line(0, &line);

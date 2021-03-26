@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_checker.c                                     :+:      :+:    :+:   */
+/*   main_push.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hbuisser <hbuisser@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -26,6 +26,7 @@ int main(int argc, char **argv)
 {
     t_data data;
     int i;
+    int j;
 
     if (argc < 2 || (argc == 2 && (!ft_strncmp(argv[1], "-v", 2))))
         return (0);
@@ -33,13 +34,29 @@ int main(int argc, char **argv)
     if (!ft_strncmp(argv[1], "-v", 2))
         i = 2;
     init_struct(&data, argc, argv);
-    if (check_digit(argc, argv, i) < 0)
+    j = 0;
+    while (argv[i][j])
     {
-        write(1, "Error\n", 6);
-        return (0);
+        if (argv[i][j] == ' ')
+            if (ft_parse_string(&data, argv, i) < 0)
+                return (0);
+        j++;
     }
-    parse_stack(argv, &data, i);
-    //data.nb_chunk = get_nbr_chunck()
+    j = 0;
+    if (data.string_bool < 1)
+    {
+        parse_stack(argv, &data, i);
+        if (check_digit(argc, argv, i))
+        {
+            write(1, "Error\n", 6);
+            return (-1);
+        }
+    }
+    if (data.len_a < 5)
+        small_bash(&data);
+    else
+        data.nb_chunk = get_nbr_chunck(data.len_a);
+
     if (!ft_strncmp(argv[1], "-v", 2))
         debug(&data);
     return (1);

@@ -40,9 +40,16 @@ typedef struct  s_data
 */
 
 void init_struct(t_data *data, int argc, char **argv);
+int ft_parse_string(t_data *data, char **argv, int i);
 int parse_stack(char **argv, t_data *data, int j);
 int	check_digit(int argc, char **argv, int i);
 int debug(t_data *data);
+
+/*
+*** HARD
+*/
+
+int small_bash(t_data * data);
 
 /*
 *** INSTRUCTIONS
