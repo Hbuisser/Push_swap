@@ -12,6 +12,31 @@
 
 #include "include/push_swap.h"
 
+int check_in_b(t_data *data)
+{
+    int i;
+    int count;
+
+    count = 0;
+    i = 1;
+    if (data->b[0] < data->b[1])
+    {
+        sb(data);
+        write(1, "sb\n", 3);
+        while (i < data->len_b)
+        {
+            if (data->b[0] < data->b[i])
+                count += 1;
+            i++;
+        }
+        if (count > data->len_b / 2)
+        {
+
+        }
+    }
+    return (0);
+}
+
 int compare_and_push(t_data *data, int iter)
 {
     int i;
@@ -46,6 +71,7 @@ int compare_and_push(t_data *data, int iter)
                 printf("push\n");
                 pb(data);
                 write(1, "pb\n", 3);
+                //check_in_b(data);
                 push = 1;
             }
             l++;

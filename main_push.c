@@ -154,6 +154,8 @@ int main(int argc, char **argv)
     init_struct(&data, argc, argv);
     if (check_double(&data, i, argv) > 0)
         return (0);
+    if (check_max(&data, i, argv) > 0)
+        return (0);
     j = 0;
     while (argv[i][j])
     {
@@ -162,7 +164,6 @@ int main(int argc, char **argv)
                 return (0);
         j++;
     }
-    j = 0;
     if (data.string_bool < 1)
     {
         parse_stack(argv, &data, i);

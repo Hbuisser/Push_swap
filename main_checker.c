@@ -87,6 +87,8 @@ int main(int argc, char **argv)
     init_struct(&data, argc, argv);
     if (check_double(&data, i, argv) > 0)
         return (0);
+    if (check_max(&data, i, argv) > 0)
+        return (0);
     j = 0;
     while (argv[i][j])
     {
@@ -116,6 +118,11 @@ int main(int argc, char **argv)
             break ;
     }
     exec_instruct(&data);
+    if (already_in_order(&data) > 0)
+    {
+        write(1, "OK\n", 3);
+        return (1);
+    }
     if (!ft_strncmp(argv[1], "-v", 2))
         debug(&data);
     display_result(&data);

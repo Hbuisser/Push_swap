@@ -134,20 +134,6 @@ int hard_5(t_data *data)
     return (1);
 }
 
-int already_in_order(t_data *data)
-{
-    int i;
-
-    i = 0;
-    while (i < data->len_a - 1)
-    {
-        if (data->a[i] > data->a[i + 1])
-            return (0);
-        i++;
-    }
-    return (1);
-}
-
 int small_bash(t_data * data)
 {
     int tmp;

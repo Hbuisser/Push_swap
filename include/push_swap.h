@@ -48,13 +48,15 @@ int ft_parse_string(t_data *data, char **argv, int i);
 int parse_stack(char **argv, t_data *data, int j);
 int	check_digit(int argc, char **argv, int i);
 int debug(t_data *data);
+int	check_int_min_max(char *str);
+int check_max(t_data *data, int nb, char **argv);
+int already_in_order(t_data *data);
 
 /*
 *** HARD
 */
 
 int small_bash(t_data * data);
-int already_in_order(t_data *data);
 
 /*
 *** ALGO PUSH

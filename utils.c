@@ -12,6 +12,35 @@
 
 #include "include/push_swap.h"
 
+int already_in_order(t_data *data)
+{
+    int i;
+
+    i = 0;
+    while (i < data->len_a - 1)
+    {
+        if (data->a[i] > data->a[i + 1])
+            return (0);
+        i++;
+    }
+    return (1);
+}
+
+int		check_int_min_max(char *str)
+{
+	if (((str[0] == '+' || str[0] == '-') && ft_strlen(str + 1) < 10)
+		|| ft_strlen(str) < 10)
+		return (1);
+	if (((str[0] == '+' || str[0] == '-') && ft_strlen(str + 1) > 10)
+		|| ft_strlen(str) > 11)
+		return (0);
+	if ((str[0] == '+' && ft_strncmp("2147483647", str + 1, 12) < 0)
+		|| (str[0] == '-' && ft_strncmp("2147483648", str + 1, 12) < 0)
+		|| (ft_isdigit(str[0]) && ft_strncmp("2147483647", str, 12) < 0))
+		return (0);
+	return (1);
+}
+
 int debug(t_data *data)
 {
     int i;
@@ -100,6 +129,20 @@ int     ft_parse_string(t_data *data, char **argv, int i)
     {
         write(1, "Error\n", 6);
         return (-1);
+    }
+    return (0);
+}
+
+int check_max(t_data *data, int nb, char **argv)
+{
+    int i;
+
+    i = 0;
+    while (i < data->init_len)
+    {
+        if (check_int_min_max(argv[nb + i]) < 1)
+            return (1);
+        i++;
     }
     return (0);
 }

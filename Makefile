@@ -11,7 +11,8 @@
 # **************************************************************************** #
 
 SRCS_CHECKER = main_checker.c \
-	instructions/swap_and_push.c \
+	instructions/push.c \
+	instructions/swap.c \
 	instructions/rotate.c \
 	instructions/reverse.c \
 	utils.c \
@@ -19,12 +20,13 @@ SRCS_CHECKER = main_checker.c \
 OBJS_CHECKER = $(SRCS_CHECKER:%.c=%.o)
 
 SRCS_PUSH = main_push.c \
-	utils.c \
-	hard.c \
 	algo_push.c \
-	instructions/swap_and_push.c \
+	instructions/push.c \
+	instructions/swap.c \
 	instructions/rotate.c \
 	instructions/reverse.c \
+	hard.c \
+	utils.c \
 		
 OBJS_PUSH = $(SRCS_PUSH:%.c=%.o)
 
