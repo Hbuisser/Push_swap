@@ -79,23 +79,3 @@ int compare_unsorted_and_sorted(t_data *data)
     // }
     return (1);
 }
-
-
-int first_chunk_push(t_data *data)
-{
-    int i;
-    int j;
-
-    i = 0;
-    j = 0;
-    while (i < data->len_a)
-    {
-        while (j < data->nb_chunk)
-        {
-            if (data->a[0] == data->sorted_arr[k])
-
-        }
-        i++;
-    }
-    return (1);
-}

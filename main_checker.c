@@ -85,6 +85,8 @@ int main(int argc, char **argv)
     if (!ft_strncmp(argv[1], "-v", 2))
         i = 2;
     init_struct(&data, argc, argv);
+    if (check_double(&data, i, argv) > 0)
+        return (0);
     j = 0;
     while (argv[i][j])
     {

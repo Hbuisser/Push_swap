@@ -43,6 +43,7 @@ typedef struct  s_data
 */
 
 void init_struct(t_data *data, int argc, char **argv);
+int check_double(t_data *data, int i, char **argv);
 int ft_parse_string(t_data *data, char **argv, int i);
 int parse_stack(char **argv, t_data *data, int j);
 int	check_digit(int argc, char **argv, int i);
@@ -61,7 +62,7 @@ int already_in_order(t_data *data);
 
 int main_algo(t_data *data);
 int compare_unsorted_and_sorted(t_data *data);
-int first_chunk_push(t_data *data);
+
 
 /*
 *** INSTRUCTIONS

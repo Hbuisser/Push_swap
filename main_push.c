@@ -133,7 +133,6 @@ int main_algo(t_data *data)
     }
     data->chunk_step[i] = data->len_a;
     printArray(data->chunk_step, data->nb_chunk);
-    first_chunk_push(data);
     //compare_unsorted_and_sorted(data);
     //create_chunk(data, sorted_arr);
     free(data->sorted_arr);
@@ -152,6 +151,8 @@ int main(int argc, char **argv)
     if (!ft_strncmp(argv[1], "-v", 2))
         i = 2;
     init_struct(&data, argc, argv);
+    if (check_double(&data, i, argv) > 0)
+        return (0);
     j = 0;
     while (argv[i][j])
     {

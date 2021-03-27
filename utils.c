@@ -104,6 +104,30 @@ int     ft_parse_string(t_data *data, char **argv, int i)
     return (0);
 }
 
+int check_double(t_data *data, int i, char **argv)
+{
+    int j;
+    int k;
+
+    j = 0;
+    k = 0;
+    while (j < data->init_len)
+    {
+        k = j + 1;
+        while (k < data->init_len)
+        {
+            // On peut utiliser strcmp ???????
+            if (!(strcmp(argv[j + i], argv[k + i])))
+            {
+                return (1);
+            }
+            k++;
+        }
+        j++;
+    }
+    return (0);
+}
+
 void init_struct(t_data *data, int argc, char **argv)
 {
     data->line = "";
