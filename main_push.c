@@ -21,6 +21,22 @@ void printArray(int *arr, int size)
     printf("\n");
 }
 
+int	small_bash(t_data *data)
+{
+	int tmp;
+
+	tmp = 0;
+	if (data->len_a == 2)
+		hard_2(data);
+	else if (data->len_a == 3)
+		hard_3(data);
+	else if (data->len_a == 4)
+		hard_4(data);
+	else if (data->len_a == 5)
+		hard_5(data);
+	return (0);
+}
+
 // int make_chunk_array(t_data *data, int *sorted_arr, int len)
 // {
 //     int *new_chunk;

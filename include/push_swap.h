@@ -56,7 +56,11 @@ int already_in_order(t_data *data);
 *** HARD
 */
 
-int small_bash(t_data * data);
+int	hard_2(t_data *data);
+int	hard_3_bis(t_data *data);
+int	hard_3(t_data *data);
+int	hard_4(t_data *data);
+int	hard_5(t_data *data);
 
 /*
 *** ALGO PUSH
@@ -65,6 +69,7 @@ int small_bash(t_data * data);
 int main_algo(t_data *data);
 int compare_unsorted_and_sorted(t_data *data);
 int compare_and_push(t_data *data, int iter);
+int small_bash(t_data * data);
 
 /*
 *** INSTRUCTIONS
