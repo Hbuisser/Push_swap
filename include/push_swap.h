@@ -62,7 +62,7 @@ int already_in_order(t_data *data);
 
 int main_algo(t_data *data);
 int compare_unsorted_and_sorted(t_data *data);
-
+int compare_and_push(t_data *data, int iter);
 
 /*
 *** INSTRUCTIONS

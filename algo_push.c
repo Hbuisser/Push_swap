@@ -12,70 +12,72 @@
 
 #include "include/push_swap.h"
 
-int compare_unsorted_and_sorted(t_data *data)
+int compare_and_push(t_data *data, int iter)
 {
     int i;
     int j;
     int k;
+    int l;
     int push;
+    int len;
 
     i = 0;
     j = 0;
     k = 0;
+    l = 0;
     push = 0;
-    //nb_chunk = 4
-    //chunk_step = tableau int avec indice
 
-    // itere dans les chunks
-    while (i < data->nb_chunk)
+
+    k = k + iter;
+    l = k;
+    len = data->len_a;
+    printf("lena%i\n", data->len_a);
+    while (i < len)
     {
-        // dans le premier chunk, voir si le premier de la unsorted est dans le chunk
-    // si oui, pa
-        while (j < data->chunk_step[i])
+        push = 0;
+        j = 0;
+        l = k;
+        while (j < data->len_chunk + 1 && data->len_a > 0)
         {
-            if (data->a[0] == data->sorted_arr[k])
+            printf("a[0]:%i\n", data->a[0]);
+            printf("sorted[l]:%i\n", data->sorted_arr[l]);
+            if ((data->a[0] == data->sorted_arr[l]) && (push == 0))
             {
+                printf("push\n");
                 pb(data);
                 write(1, "pb\n", 3);
                 push = 1;
-                j++;
-                break ;
             }
+            l++;
             j++;
         }
-    // si non ra
-    // avancer de 1 dans la unsorted
-
+        if (push == 0)
+        {
+            ra(data);
+            write(1, "ra\n", 3);
+        }
         i++;
+        printf("i: %i\n", i);
+        printf("-------------\n");
     }
 
-
-
-    // while (i < data->nb_chunk)
-    // {
-    //     j = 0;
-    //     while (j < data->chunk_step[i])
-    //     {
-    //         if (data->a[0] == data->sorted_arr[k])
-    //         {
-    //             pb(data);
-    //             write(1, "pb\n", 3);
-    //             push = 1;
-    //             j++;
-    //             break ;
-    //         }
-    //         k++;
-    //         j++;
-    //     }
-    //     if (push == 0)
-    //     {
-    //         ra(data);
-    //         write(1, "ra\n", 3);
-    //     }
-
-
-
-    //     i++;
-    // }
     return (1);
 }
+
+
+int compare_unsorted_and_sorted(t_data *data)
+{
+    int i;
+    int iter;
+
+    iter = 0;
+    i = 0;
+    while (i < data->nb_chunk)
+    {
+        compare_and_push(data, iter);
+        iter = iter + data->len_chunk + 1;
+        i++;
+    }
+    return (1);
+}
+

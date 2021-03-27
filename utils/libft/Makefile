@@ -45,6 +45,7 @@ SRCSC		= src/ft_memset.c \
 				src/ft_putendl_fd.c \
 				src/ft_putnbr_fd.c \
 				src/ft_split.c \
+				src/ft_strcmp.c \
 				src/ft_isspace.c \
 				src/ft_utoa_base.c \
 				src/get_next_line.c

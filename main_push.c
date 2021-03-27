@@ -131,9 +131,10 @@ int main_algo(t_data *data)
         j = j + data->len_chunk;
         i++;
     }
-    data->chunk_step[i] = data->len_a;
+    data->chunk_step[i] = data->len_a - 1;
     printArray(data->chunk_step, data->nb_chunk);
-    //compare_unsorted_and_sorted(data);
+    compare_unsorted_and_sorted(data);
+    //compare_and_push(data);
     //create_chunk(data, sorted_arr);
     free(data->sorted_arr);
     return (0);

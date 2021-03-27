@@ -116,11 +116,8 @@ int check_double(t_data *data, int i, char **argv)
         k = j + 1;
         while (k < data->init_len)
         {
-            // On peut utiliser strcmp ???????
-            if (!(strcmp(argv[j + i], argv[k + i])))
-            {
+            if (!(ft_strcmp(argv[j + i], argv[k + i])))
                 return (1);
-            }
             k++;
         }
         j++;
