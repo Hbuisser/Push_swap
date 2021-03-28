@@ -119,6 +119,19 @@ int parse_stack(t_data *data, char **argv, int argc)
     return (1);
 }
 
+void     free_tab(char **tab)
+{
+    int i;
+
+    i = 0;
+    while (tab[i])
+    {
+        free(tab[i]);
+        i++;
+    }
+    free(tab);
+}
+
 int     parse_stack_string(t_data *data, char **argv, int i)
 {
     int j;
@@ -138,22 +151,22 @@ int     parse_stack_string(t_data *data, char **argv, int i)
     len++;
     data->len_a = len;
     if (!(data->a = (int *)malloc(sizeof(int) * len)))
-        return (0);
+        return (-1);
     i = 0;
     while (i < data->len_a)
     {
         data->a[i] = ft_atoi(tab[i]);
         i++;
     }
-    if (!(data->b = (int *)malloc(sizeof(int) * data->init_len)))
+    free_tab(tab);
+    if (!(data->b = (int *)malloc(sizeof(int) * len)))
         return (-1);
-    ft_bzero(data->b, data->init_len);
-    i = 0;
-    if (check_digit(len, tab, i))
-    {
-        write(1, "Error\n", 6);
-        return (-1);
-    }
+    ft_bzero(data->b, len);
+    // if (check_digit(len, tab, data->i))
+    // {
+    //     write(1, "Error\n", 6);
+    //     return (-1);
+    // }
     return (0);
 }
 
