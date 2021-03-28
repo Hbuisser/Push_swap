@@ -96,11 +96,34 @@ int	hard_4(t_data *data)
 	return (1);
 }
 
+void	bring_above(t_data *data)
+{
+	int i;
+	int index;
+
+	i = 1;
+	index = 0;
+	while (i < data->len_a)
+	{
+		if (data->a[i] < data->a[index])
+			index = i;
+		i++;
+	}
+	while (index > 0)
+	{
+		ra(data);
+		write(1, "ra\n", 3);
+		index--;
+	}
+}
+
 int	hard_5(t_data *data)
 {
-	pb(data);
+	bring_above(data);
 	pb(data);
 	write(1, "pb\n", 3);
+	bring_above(data);
+	pb(data);
 	write(1, "pb\n", 3);
 	hard_3(data);
 	pa(data);

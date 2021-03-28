@@ -75,7 +75,7 @@ int debug(t_data *data)
 
 int		check_digit(int argc, char **argv, int i)
 {
-	int		j;
+	int j;
 
 	j = 0;
 	while (i < argc)
@@ -92,7 +92,25 @@ int		check_digit(int argc, char **argv, int i)
 	return (0);
 }
 
-int parse_stack(t_data *data, char **argv, int argc)
+int     check_digit_with_string(t_data *data)
+{
+    int i;
+    int j;
+
+	j = 0;
+    i = data->i;
+	while (i < data->len_a)
+	{
+		if (!ft_isdigit(data->a[i]))
+			return (-1);
+		j++;
+		j = 0;
+		i++;
+	}
+    return (0);
+}
+
+int     parse_stack(t_data *data, char **argv, int argc)
 {
     int i;
     int j;
@@ -162,7 +180,7 @@ int     parse_stack_string(t_data *data, char **argv, int i)
     if (!(data->b = (int *)malloc(sizeof(int) * len)))
         return (-1);
     ft_bzero(data->b, len);
-    // if (check_digit(len, tab, data->i))
+    // if (check_digit_with_string(len, tab, data->i))
     // {
     //     write(1, "Error\n", 6);
     //     return (-1);
