@@ -54,7 +54,10 @@ int check_max(t_data *data, int nb, char **argv);
 int already_in_order(t_data *data);
 int	put_v_and_check(t_data *data, char **argv, int argc);
 int	parse(t_data *data, char **argv, int argc);
+void bring_above(t_data *data);
 int free_all(t_data *data);
+
+void	printArray(int *arr, int size);
 
 /*
 *** HARD

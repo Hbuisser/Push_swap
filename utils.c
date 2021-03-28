@@ -12,6 +12,36 @@
 
 #include "include/push_swap.h"
 
+void	printArray(int *arr, int size)
+{
+	int i;
+
+	for (i = 0; i < size; i++)
+		printf("%d ", arr[i]);
+	printf("\n");
+}
+
+void	bring_above(t_data *data)
+{
+	int i;
+	int index;
+
+	i = 1;
+	index = 0;
+	while (i < data->len_a)
+	{
+		if (data->a[i] < data->a[index])
+			index = i;
+		i++;
+	}
+	while (index > 0)
+	{
+		ra(data);
+		write(1, "ra\n", 3);
+		index--;
+	}
+}
+
 int free_all(t_data *data)
 {
     if (data->a)
@@ -103,8 +133,6 @@ int     check_digit_with_string(t_data *data)
 	{
 		if (!ft_isdigit(data->a[i]))
 			return (-1);
-		j++;
-		j = 0;
 		i++;
 	}
     return (0);
@@ -180,7 +208,8 @@ int     parse_stack_string(t_data *data, char **argv, int i)
     if (!(data->b = (int *)malloc(sizeof(int) * len)))
         return (-1);
     ft_bzero(data->b, len);
-    // if (check_digit_with_string(len, tab, data->i))
+    printArray(data->a, data->len_a);
+    // if (check_digit_with_string(data))
     // {
     //     write(1, "Error\n", 6);
     //     return (-1);

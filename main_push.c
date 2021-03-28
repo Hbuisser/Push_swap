@@ -94,7 +94,6 @@ int		main_algo(t_data *data)
 
 	data->nb_chunk = get_nbr_chunck(data->len_a);
 	data->sorted_arr = get_sorted_array(data->a, data->len_a);
-	// attention au dernier, pas la meme taille
 	data->len_chunk = data->len_a / data->nb_chunk;
 	if (!(data->chunk_step = (int *)malloc(sizeof(int) * data->nb_chunk)))
 		return (0);
