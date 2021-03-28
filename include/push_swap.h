@@ -25,6 +25,7 @@
 
 typedef struct  s_data
 {
+    int         i;
     int         init_len;
     int         len_a;
     int         len_b;
@@ -45,12 +46,14 @@ typedef struct  s_data
 void init_struct(t_data *data, int argc, char **argv);
 int check_double(t_data *data, int i, char **argv);
 int ft_parse_string(t_data *data, char **argv, int i);
-int parse_stack(char **argv, t_data *data, int j);
+int parse_stack(t_data *data, char **argv, int argc);
 int	check_digit(int argc, char **argv, int i);
 int debug(t_data *data);
 int	check_int_min_max(char *str);
 int check_max(t_data *data, int nb, char **argv);
 int already_in_order(t_data *data);
+int	put_v_and_check(t_data *data, char **argv, int argc);
+int	parse(t_data *data, char **argv, int argc);
 
 /*
 *** HARD

@@ -37,47 +37,6 @@ int	small_bash(t_data *data)
 	return (0);
 }
 
-// int make_chunk_array(t_data *data, int *sorted_arr, int len)
-// {
-//     int *new_chunk;
-//     int i;
-
-//     if (!(new_chunk = (int *)malloc(sizeof(int) * data->len_chunk)))
-//         return (0);
-//     i = 0;
-//     while (i < data->len_chunk)
-//     {
-//         new_chunk[i] = sorted_arr[len];
-//         len++;
-//         i++;
-//     }
-//     printArray(new_chunk, data->len_chunk);
-//     return (0);
-// }
-
-// int     create_chunk(t_data *data, int *sorted_arr)
-// {
-//     int len;
-//     int mod;
-//     int i;
-//     int j;
-
-//     data->len_chunk = data->len_a / data->nb_chunk;
-//     len = data->len_a / data->nb_chunk;
-//     mod = data->len_a % data->nb_chunk;
-//     //printf("mod%i\n", mod);
-//     //printf("lena%i\n", data->len_a);
-//     i = 0;
-//     j = 0;
-//     while (i < data->nb_chunk)
-//     {
-//         make_chunk_array(data, sorted_arr, j);
-//         j = j + len;
-//         i++;
-//     }
-//     return (1);
-// }
-
 int     get_nbr_chunck(int size)
 {
     if (size < 99)
@@ -159,36 +118,12 @@ int main_algo(t_data *data)
 int main(int argc, char **argv)
 {
     t_data data;
-    int i;
-    int j;
 
-    if (argc < 2 || (argc == 2 && (!ft_strncmp(argv[1], "-v", 2))))
-        return (0);
-    i = 1;
-    if (!ft_strncmp(argv[1], "-v", 2))
-        i = 2;
     init_struct(&data, argc, argv);
-    if (check_double(&data, i, argv) > 0)
-        return (0);
-    if (check_max(&data, i, argv) > 0)
-        return (0);
-    j = 0;
-    while (argv[i][j])
-    {
-        if (argv[i][j] == ' ')
-            if (ft_parse_string(&data, argv, i) < 0)
-                return (0);
-        j++;
-    }
-    if (data.string_bool < 1)
-    {
-        parse_stack(argv, &data, i);
-        if (check_digit(argc, argv, i))
-        {
-            write(1, "Error\n", 6);
-            return (-1);
-        }
-    }
+    if (put_v_and_check(&data, argv, argc) < 0)
+		return (0);
+    if (parse(&data, argv, argc) < 0)
+		return (0);
     if (already_in_order(&data) > 0)
         return (1);
     if (data.len_a < 6)
@@ -199,3 +134,47 @@ int main(int argc, char **argv)
         debug(&data);
     return (1);
 }
+
+
+
+
+// int make_chunk_array(t_data *data, int *sorted_arr, int len)
+// {
+//     int *new_chunk;
+//     int i;
+
+//     if (!(new_chunk = (int *)malloc(sizeof(int) * data->len_chunk)))
+//         return (0);
+//     i = 0;
+//     while (i < data->len_chunk)
+//     {
+//         new_chunk[i] = sorted_arr[len];
+//         len++;
+//         i++;
+//     }
+//     printArray(new_chunk, data->len_chunk);
+//     return (0);
+// }
+
+// int     create_chunk(t_data *data, int *sorted_arr)
+// {
+//     int len;
+//     int mod;
+//     int i;
+//     int j;
+
+//     data->len_chunk = data->len_a / data->nb_chunk;
+//     len = data->len_a / data->nb_chunk;
+//     mod = data->len_a % data->nb_chunk;
+//     //printf("mod%i\n", mod);
+//     //printf("lena%i\n", data->len_a);
+//     i = 0;
+//     j = 0;
+//     while (i < data->nb_chunk)
+//     {
+//         make_chunk_array(data, sorted_arr, j);
+//         j = j + len;
+//         i++;
+//     }
+//     return (1);
+// }

@@ -79,22 +79,27 @@ int		check_digit(int argc, char **argv, int i)
 	return (0);
 }
 
-int parse_stack(char **argv, t_data *data, int j)
+int parse_stack(t_data *data, char **argv, int argc)
 {
     int i;
 
-    i = 0;
     data->len_a = data->init_len;
     if (!(data->a = (int *)malloc(sizeof(int) * data->init_len)))
-        return (0);
+        return (-1);
+    i = 0;
     while (i < data->init_len)
     {
-        data->a[i] = ft_atoi(argv[j]);
+        data->a[i] = ft_atoi(argv[data->i]);
         i++;
-        j++;
+        data->i++;
     }
     if (!(data->b = (int *)malloc(sizeof(int) * data->init_len)))
-        return (0);
+        return (-1);
+    if (check_digit(argc, argv, data->i))
+    {
+        write(1, "Error\n", 6);
+        return (-1);
+    }
     return (1);
 }
 
@@ -133,6 +138,24 @@ int     ft_parse_string(t_data *data, char **argv, int i)
     return (0);
 }
 
+int	parse(t_data *data, char **argv, int argc)
+{
+	int i;
+
+	i = 0;
+	while (argv[data->i][i])
+	{
+		if (argv[data->i][i] == ' ')
+			if (ft_parse_string(data, argv, data->i) < 0)
+				return (-1);
+		i++;
+	}
+	if (data->string_bool < 1)
+		if (parse_stack(data, argv, argc) < 0)
+			return (-1);
+	return (0);
+}
+
 int check_max(t_data *data, int nb, char **argv)
 {
     int i;
@@ -168,8 +191,22 @@ int check_double(t_data *data, int i, char **argv)
     return (0);
 }
 
+int	put_v_and_check(t_data *data, char **argv, int argc)
+{
+	if (!ft_strncmp(argv[1], "-v", 2))
+		data->i = 2;
+	if (argc < 2 || (argc == 2 && (!ft_strncmp(argv[1], "-v", 2))))
+		return (-1);
+	if (check_double(data, data->i, argv) > 0)
+		return (-1);
+	if (check_max(data, data->i, argv) > 0)
+		return (-1);
+	return (0);
+}
+
 void init_struct(t_data *data, int argc, char **argv)
 {
+    data->i = 1;
     data->line = "";
     data->string_bool = 0;
     data->nb_chunk = 0;
