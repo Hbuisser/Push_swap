@@ -74,6 +74,7 @@ int	hard_3(t_data *data)
 	return (1);
 }
 
+//////////////// no good
 int	hard_4(t_data *data)
 {
 	pb(data);

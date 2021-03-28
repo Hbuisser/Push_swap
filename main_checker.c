@@ -106,5 +106,6 @@ int		main(int argc, char **argv)
 	if (!ft_strncmp(argv[1], "-v", 2))
 		debug(&data);
 	display_result(&data);
+	free_all(&data);
 	return (0);
 }

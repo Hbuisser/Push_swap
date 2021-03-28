@@ -12,32 +12,79 @@
 
 #include "include/push_swap.h"
 
-int check_in_b(t_data *data)
+int put_at_first_place(t_data *data, int half, int index)
 {
-    int i;
-    int count;
-
-    count = 0;
-    i = 1;
-    if (data->b[0] < data->b[1])
+    if (half == 1)
     {
-        sb(data);
-        write(1, "sb\n", 3);
-        while (i < data->len_b)
+        while (index > 0)
         {
-            if (data->b[0] < data->b[i])
-                count += 1;
-            i++;
-        }
-        if (count > data->len_b / 2)
-        {
-
+            rb(data);
+            write(1, "rb\n", 3);
+            index--;
         }
     }
-    return (0);
+    else
+    {
+        while (index < data->len_b)
+        {
+            rrb(data);
+            write(1, "rrb\n", 4);
+            index++;
+        }
+    }
+    return (1);
 }
 
-int compare_and_push(t_data *data, int iter)
+int get_half(t_data *data, int index)
+{
+    int half;
+    int middle;
+
+    middle = data->len_b / 2;
+    if (index < middle)
+        half = 1;
+    else
+        half = -1;
+    return (half);
+}
+
+int find_max(t_data *data)
+{
+    int i;
+    int len;
+    int index;
+
+    index = 0;
+    len = data->len_b;
+    i = 1;
+    while (i < len)
+    {
+        if (data->b[i] > data->b[index])
+            index = i;
+        i++;
+    }
+    return (index);
+}
+
+int push_to_a(t_data *data)
+{
+    int i;
+    int index;
+    int half;
+
+    i = 0;
+    while (i < data->len_b)
+    {
+        index = find_max(data);
+        half = get_half(data, index);
+        put_at_first_place(data, half, index);
+        pa(data);
+        write(1, "pa\n", 3);
+    }
+    return (1);
+}
+
+int compare_with_chunk_and_push(t_data *data, int iter)
 {
     int i;
     int j;
@@ -51,12 +98,9 @@ int compare_and_push(t_data *data, int iter)
     k = 0;
     l = 0;
     push = 0;
-
-
     k = k + iter;
     l = k;
     len = data->len_a;
-    printf("lena%i\n", data->len_a);
     while (i < len)
     {
         push = 0;
@@ -64,14 +108,10 @@ int compare_and_push(t_data *data, int iter)
         l = k;
         while (j < data->len_chunk + 1 && data->len_a > 0)
         {
-            printf("a[0]:%i\n", data->a[0]);
-            printf("sorted[l]:%i\n", data->sorted_arr[l]);
             if ((data->a[0] == data->sorted_arr[l]) && (push == 0))
             {
-                printf("push\n");
                 pb(data);
                 write(1, "pb\n", 3);
-                //check_in_b(data);
                 push = 1;
             }
             l++;
@@ -83,15 +123,11 @@ int compare_and_push(t_data *data, int iter)
             write(1, "ra\n", 3);
         }
         i++;
-        printf("i: %i\n", i);
-        printf("-------------\n");
     }
-
     return (1);
 }
 
-
-int compare_unsorted_and_sorted(t_data *data)
+int push_to_b(t_data *data)
 {
     int i;
     int iter;
@@ -100,10 +136,9 @@ int compare_unsorted_and_sorted(t_data *data)
     i = 0;
     while (i < data->nb_chunk)
     {
-        compare_and_push(data, iter);
+        compare_with_chunk_and_push(data, iter);
         iter = iter + data->len_chunk + 1;
         i++;
     }
     return (1);
 }
-

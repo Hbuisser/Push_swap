@@ -72,7 +72,7 @@ int		*get_tmp_b(t_data *data)
 	int *tmp;
 	int i;
 
-	if (!(tmp = (int *)malloc(sizeof(int) * data->len_b - 1)))
+	if (!(tmp = (int *)malloc(sizeof(int) * data->len_b)))
 		return (0);
 	i = 0;
 	while (i < data->len_b)

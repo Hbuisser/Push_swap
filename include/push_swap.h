@@ -44,8 +44,8 @@ typedef struct  s_data
 */
 
 void init_struct(t_data *data, int argc, char **argv);
-int check_double(t_data *data, int i, char **argv);
-int ft_parse_string(t_data *data, char **argv, int i);
+int check_double(t_data *data, char **argv);
+int parse_stack_string(t_data *data, char **argv, int i);
 int parse_stack(t_data *data, char **argv, int argc);
 int	check_digit(int argc, char **argv, int i);
 int debug(t_data *data);
@@ -54,6 +54,7 @@ int check_max(t_data *data, int nb, char **argv);
 int already_in_order(t_data *data);
 int	put_v_and_check(t_data *data, char **argv, int argc);
 int	parse(t_data *data, char **argv, int argc);
+int free_all(t_data *data);
 
 /*
 *** HARD
@@ -70,8 +71,9 @@ int	hard_5(t_data *data);
 */
 
 int main_algo(t_data *data);
-int compare_unsorted_and_sorted(t_data *data);
-int compare_and_push(t_data *data, int iter);
+int push_to_b(t_data *data);
+int push_to_a(t_data *data);
+int compare_with_chunk_and_push(t_data *data, int iter);
 int small_bash(t_data * data);
 
 /*

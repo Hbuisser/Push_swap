@@ -12,6 +12,19 @@
 
 #include "include/push_swap.h"
 
+int free_all(t_data *data)
+{
+    if (data->a)
+        free(data->a);
+    if (data->b)
+        free(data->b);
+    if (data->chunk_step)
+        free(data->chunk_step);
+    if (data->sorted_arr)
+        free(data->sorted_arr);
+    return (1);
+}
+
 int already_in_order(t_data *data)
 {
     int i;
@@ -82,19 +95,22 @@ int		check_digit(int argc, char **argv, int i)
 int parse_stack(t_data *data, char **argv, int argc)
 {
     int i;
+    int j;
 
     data->len_a = data->init_len;
     if (!(data->a = (int *)malloc(sizeof(int) * data->init_len)))
         return (-1);
+    j = data->i;
     i = 0;
     while (i < data->init_len)
     {
-        data->a[i] = ft_atoi(argv[data->i]);
+        data->a[i] = ft_atoi(argv[j]);
         i++;
-        data->i++;
+        j++;
     }
     if (!(data->b = (int *)malloc(sizeof(int) * data->init_len)))
         return (-1);
+    ft_bzero(data->b, data->init_len);
     if (check_digit(argc, argv, data->i))
     {
         write(1, "Error\n", 6);
@@ -103,7 +119,7 @@ int parse_stack(t_data *data, char **argv, int argc)
     return (1);
 }
 
-int     ft_parse_string(t_data *data, char **argv, int i)
+int     parse_stack_string(t_data *data, char **argv, int i)
 {
     int j;
     int len;
@@ -129,6 +145,9 @@ int     ft_parse_string(t_data *data, char **argv, int i)
         data->a[i] = ft_atoi(tab[i]);
         i++;
     }
+    if (!(data->b = (int *)malloc(sizeof(int) * data->init_len)))
+        return (-1);
+    ft_bzero(data->b, data->init_len);
     i = 0;
     if (check_digit(len, tab, i))
     {
@@ -146,7 +165,7 @@ int	parse(t_data *data, char **argv, int argc)
 	while (argv[data->i][i])
 	{
 		if (argv[data->i][i] == ' ')
-			if (ft_parse_string(data, argv, data->i) < 0)
+			if (parse_stack_string(data, argv, data->i) < 0)
 				return (-1);
 		i++;
 	}
@@ -170,7 +189,7 @@ int check_max(t_data *data, int nb, char **argv)
     return (0);
 }
 
-int check_double(t_data *data, int i, char **argv)
+int check_double(t_data *data, char **argv)
 {
     int j;
     int k;
@@ -182,7 +201,7 @@ int check_double(t_data *data, int i, char **argv)
         k = j + 1;
         while (k < data->init_len)
         {
-            if (!(ft_strcmp(argv[j + i], argv[k + i])))
+            if (!(ft_strcmp(argv[j + data->i], argv[k + data->i])))
                 return (1);
             k++;
         }
@@ -195,12 +214,12 @@ int	put_v_and_check(t_data *data, char **argv, int argc)
 {
 	if (!ft_strncmp(argv[1], "-v", 2))
 		data->i = 2;
-	if (argc < 2 || (argc == 2 && (!ft_strncmp(argv[1], "-v", 2))))
+	if ((argc < 2 && data->string_bool == 0) || (argc == 2 && (!ft_strncmp(argv[1], "-v", 2) && data->string_bool == 0)))
 		return (-1);
-	if (check_double(data, data->i, argv) > 0)
+	if (check_double(data, argv) > 0)
 		return (-1);
-	if (check_max(data, data->i, argv) > 0)
-		return (-1);
+	// if (check_max(data, data->i, argv) > 0)
+	// 	return (-1);
 	return (0);
 }
 
