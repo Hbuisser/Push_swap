@@ -78,6 +78,7 @@ int		exec_instruct(t_data *data)
 		get_instruc(data, instruct, i);
 		i++;
 	}
+	free_tab(instruct);
 	return (1);
 }
 
@@ -96,9 +97,8 @@ int		main(int argc, char **argv)
 	{
 		instruct = get_next_line(0, &line);
 		data.line = ft_strjoin(data.line, line);
-		data.line = ft_strjoin(data.line, "\n");
+		data.line = ft_strjoin_free_first(data.line, "\n");
 		free(line);
-		line = NULL;
 		if (instruct == 0)
 			break ;
 	}

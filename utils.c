@@ -122,18 +122,18 @@ int		check_digit(int argc, char **argv, int i)
 	return (0);
 }
 
-int     check_digit_with_string(t_data *data)
+int     check_digit_with_string(t_data *data, char **argv)
 {
     int i;
     int j;
 
 	j = 0;
     i = data->i;
-	while (i < data->len_a)
+	while (argv[data->i][j] != '\0')
 	{
-		if (!ft_isdigit(data->a[i]))
+		if (!ft_isdigit(argv[data->i][j] || argv[data->i][j] != ' '))
 			return (-1);
-		i++;
+		j++;
 	}
     return (0);
 }
@@ -178,7 +178,7 @@ void     free_tab(char **tab)
     free(tab);
 }
 
-int     parse_stack_string(t_data *data, char **argv, int i)
+int     parse_stack_string(t_data *data, char **argv, int argc, int i)
 {
     int j;
     int len;
@@ -186,6 +186,11 @@ int     parse_stack_string(t_data *data, char **argv, int i)
 
     data->string_bool = 1;
     tab = ft_split(argv[i], ' ');
+    if (check_digit(argc, tab, 0))
+    {
+        write(1, "Error\n", 6);
+        return (-1);
+    }
     j = 0;
     len = 0;
     while (argv[i][j])
@@ -208,12 +213,6 @@ int     parse_stack_string(t_data *data, char **argv, int i)
     if (!(data->b = (int *)malloc(sizeof(int) * len)))
         return (-1);
     ft_bzero(data->b, len);
-    printArray(data->a, data->len_a);
-    // if (check_digit_with_string(data))
-    // {
-    //     write(1, "Error\n", 6);
-    //     return (-1);
-    // }
     return (0);
 }
 
@@ -225,7 +224,7 @@ int	parse(t_data *data, char **argv, int argc)
 	while (argv[data->i][i])
 	{
 		if (argv[data->i][i] == ' ')
-			if (parse_stack_string(data, argv, data->i) < 0)
+			if (parse_stack_string(data, argv, argc, data->i) < 0)
 				return (-1);
 		i++;
 	}
@@ -272,6 +271,8 @@ int check_double(t_data *data, char **argv)
 
 int	put_v_and_check(t_data *data, char **argv, int argc)
 {
+    if (argc == 1)
+        return (-1);
 	if (!ft_strncmp(argv[1], "-v", 2))
 		data->i = 2;
 	if ((argc < 2 && data->string_bool == 0) || (argc == 2 && (!ft_strncmp(argv[1], "-v", 2) && data->string_bool == 0)))
@@ -291,7 +292,7 @@ void init_struct(t_data *data, int argc, char **argv)
     data->nb_chunk = 0;
     data->len_chunk = 0;
     data->init_len = argc - 1;
-    if (!ft_strncmp(argv[1], "-v", 2))
+    if (argv[1] && !ft_strncmp(argv[1], "-v", 2))
         data->init_len -= 1;
     data->len_b = 0;
 }

@@ -37,6 +37,7 @@ SRCSC		= src/ft_memset.c \
 				src/ft_strdup.c \
 				src/ft_substr.c \
 				src/ft_strjoin.c \
+				src/ft_strjoin_free_first.c \
 				src/ft_strtrim.c \
 				src/ft_itoa.c \
 				src/ft_strmapi.c \

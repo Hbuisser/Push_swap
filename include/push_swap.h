@@ -45,7 +45,7 @@ typedef struct  s_data
 
 void init_struct(t_data *data, int argc, char **argv);
 int check_double(t_data *data, char **argv);
-int parse_stack_string(t_data *data, char **argv, int i);
+int parse_stack_string(t_data *data, char **argv, int argc, int i);
 int parse_stack(t_data *data, char **argv, int argc);
 int	check_digit(int argc, char **argv, int i);
 int debug(t_data *data);
@@ -56,6 +56,7 @@ int	put_v_and_check(t_data *data, char **argv, int argc);
 int	parse(t_data *data, char **argv, int argc);
 void bring_above(t_data *data);
 int free_all(t_data *data);
+void free_tab(char **tab);
 
 void	printArray(int *arr, int size);
 
