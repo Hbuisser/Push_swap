@@ -90,8 +90,10 @@ int		main(int argc, char **argv)
 
 	init_struct(&data, argc, argv);
 	if (check(&data, argv, argc) < 0)
-		return (free_all(&data));
+		return (0);
 	if (parse(&data, argv, argc) < 0)
+		return (free_all(&data));
+	if (already_in_order(&data) > 0)
 		return (free_all(&data));
 	while (1)
 	{

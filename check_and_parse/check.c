@@ -76,7 +76,10 @@ int		check_double(t_data *data, char **argv)
 		while (k < data->init_len)
 		{
 			if (!(ft_strcmp(argv[j + data->i], argv[k + data->i])))
+			{
+				write(1, "Error\n", 6);
 				return (1);
+			}
 			k++;
 		}
 		j++;
@@ -87,7 +90,10 @@ int		check_double(t_data *data, char **argv)
 int		check(t_data *data, char **argv, int argc)
 {
 	if (argc == 1)
+	{
+		write(1, "Error\n", 6);
 		return (-1);
+	}
 	if (!ft_strncmp(argv[1], "-v", 2))
 		data->i = 2;
 	if ((argc < 2 && data->string_bool == 0) ||
