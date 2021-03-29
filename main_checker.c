@@ -89,10 +89,10 @@ int		main(int argc, char **argv)
 	char	*line;
 
 	init_struct(&data, argc, argv);
-	if (put_v_and_check(&data, argv, argc) < 0)
-		return (0);
+	if (check(&data, argv, argc) < 0)
+		return (free_all(&data));
 	if (parse(&data, argv, argc) < 0)
-		return (0);
+		return (free_all(&data));
 	while (1)
 	{
 		instruct = get_next_line(0, &line);

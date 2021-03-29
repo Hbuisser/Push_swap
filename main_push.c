@@ -12,16 +12,41 @@
 
 #include "include/push_swap.h"
 
-// void	printArray(int *arr, int size)
-// {
-// 	int i;
+int		get_nbr_chunck(int size)
+{
+	if (size < 99)
+		return (4);
+	else if (size < 495)
+		return (6);
+	else
+		return (11);
+}
 
-// 	for (i = 0; i < size; i++)
-// 		printf("%d ", arr[i]);
-// 	printf("\n");
-// }
+int		main_algo(t_data *data)
+{
+	int i;
+	int j;
 
-int	small_bash(t_data *data)
+	data->nb_chunk = get_nbr_chunck(data->len_a);
+	data->sorted_arr = get_sorted_array(data->a, data->len_a);
+	data->len_chunk = data->len_a / data->nb_chunk;
+	if (!(data->chunk_step = (int *)malloc(sizeof(int) * data->nb_chunk)))
+		return (-1);
+	i = 0;
+	j = data->len_chunk;
+	while (i < data->nb_chunk - 1)
+	{
+		data->chunk_step[i] = j;
+		j = j + data->len_chunk;
+		i++;
+	}
+	data->chunk_step[i] = data->len_a - 1;
+	push_to_b(data);
+	push_to_a(data);
+	return (1);
+}
+
+int		small_bash(t_data *data)
 {
 	int tmp;
 
@@ -37,95 +62,24 @@ int	small_bash(t_data *data)
 	return (0);
 }
 
-int		get_nbr_chunck(int size)
-{
-	if (size < 99)
-		return (4);
-	else if (size < 495)
-		return (6);
-	else
-		return (11);
-}
-
-void	swap(int *xp, int *yp)
-{
-	int tmp = *xp;
-
-	*xp = *yp;
-	*yp = tmp;
-}
-
-int		*get_sorted_array(int *arr, int n)
-{
-	int i;
-	int j;
-	int min;
-	int *tmp_arr;
- 
-	if (!(tmp_arr = (int *)malloc(sizeof(int) * n)))
-		return (0);
-	i = 0;
-	while (i < n)
-	{
-		tmp_arr[i] = arr[i];
-		i++;
-	}
-	i = 0;
-	while (i < n - 1)
-	{
-		min = i;
-		j = i + 1;
-		while (j < n)
-		{    
-			if (tmp_arr[j] < tmp_arr[min])
-				min = j;
-			j++;
-		}    
-		swap(&tmp_arr[min], &tmp_arr[i]);
-		i++;
-	}
-	return (tmp_arr);
-}
-
-int		main_algo(t_data *data)
-{
-	int i;
-	int j;
-
-	data->nb_chunk = get_nbr_chunck(data->len_a);
-	data->sorted_arr = get_sorted_array(data->a, data->len_a);
-	data->len_chunk = data->len_a / data->nb_chunk;
-	if (!(data->chunk_step = (int *)malloc(sizeof(int) * data->nb_chunk)))
-		return (0);
-	i = 0;
-	j = data->len_chunk;
-	while (i < data->nb_chunk - 1)
-	{
-		data->chunk_step[i] = j;
-		j = j + data->len_chunk;
-		i++;
-	}
-	data->chunk_step[i] = data->len_a - 1;
-	push_to_b(data);
-	push_to_a(data);
-	return (0);
-}
-
 int		main(int argc, char **argv)
 {
 	t_data data;
 
 	init_struct(&data, argc, argv);
-	if (put_v_and_check(&data, argv, argc) < 0)
+	if (check(&data, argv, argc) < 0)
 		return (0);
 	if (parse(&data, argv, argc) < 0)
-		return (0);
+		return (free_all(&data));
 	if (already_in_order(&data) > 0)
-		return (0);
+		return (free_all(&data));
 	if (data.len_a < 6)
 		small_bash(&data);
 	else
-		main_algo(&data);
+	{
+		if (main_algo(&data) < 0)
+			return (0);
+	}
 	if (!ft_strncmp(argv[1], "-v", 2))
 		debug(&data);
 	free_all(&data);

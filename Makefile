@@ -15,6 +15,8 @@ SRCS_CHECKER = main_checker.c \
 	instructions/swap.c \
 	instructions/rotate.c \
 	instructions/reverse.c \
+	check_and_parse/check.c \
+	check_and_parse/parse.c \
 	utils.c \
 		
 OBJS_CHECKER = $(SRCS_CHECKER:%.c=%.o)
@@ -25,6 +27,8 @@ SRCS_PUSH = main_push.c \
 	instructions/swap.c \
 	instructions/rotate.c \
 	instructions/reverse.c \
+	check_and_parse/check.c \
+	check_and_parse/parse.c \
 	hard.c \
 	utils.c \
 		

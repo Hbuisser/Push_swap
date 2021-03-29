@@ -40,24 +40,36 @@ typedef struct  s_data
 }               t_data;
 
 /*
+*** CHECKS
+*/
+
+int check_double(t_data *data, char **argv);
+int	check_digit(int argc, char **argv, int i);
+int	check_int_min_max(char *str);
+int 	check_int_min_max_tab(char **tab);
+
+/*
+*** PARSE
+*/
+
+int	parse(t_data *data, char **argv, int argc);
+int parse_stack_string(t_data *data, char **argv);
+int parse_stack(t_data *data, char **argv, int argc);
+int already_in_order(t_data *data);
+
+/*
 *** UTILS
 */
 
 void init_struct(t_data *data, int argc, char **argv);
-int check_double(t_data *data, char **argv);
-int parse_stack_string(t_data *data, char **argv, int argc, int i);
-int parse_stack(t_data *data, char **argv, int argc);
-int	check_digit(int argc, char **argv, int i);
-int debug(t_data *data);
-int	check_int_min_max(char *str);
+void debug(t_data *data);
 int check_max(t_data *data, int nb, char **argv);
-int already_in_order(t_data *data);
-int	put_v_and_check(t_data *data, char **argv, int argc);
-int	parse(t_data *data, char **argv, int argc);
+int	check(t_data *data, char **argv, int argc);
 void bring_above(t_data *data);
 int free_all(t_data *data);
 void free_tab(char **tab);
-
+void	swap(int *xp, int *yp);
+int		*get_sorted_array(int *arr, int n);
 void	printArray(int *arr, int size);
 
 /*
