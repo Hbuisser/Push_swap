@@ -58,7 +58,7 @@ int		check_digit(int argc, char **argv, int i)
 void	init_struct(t_data *data, int argc, char **argv)
 {
 	data->i = 1;
-	data->line = "";
+	data->line = ft_strdup("");
 	data->nb_chunk = 0;
 	data->len_chunk = 0;
 	data->init_len = argc - 1;

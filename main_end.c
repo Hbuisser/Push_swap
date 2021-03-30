@@ -55,6 +55,8 @@ void	free_tab(char **tab)
 
 int		free_all(t_data *data)
 {
+	if (data->line)
+		free(data->line);
 	if (data->a)
 		free(data->a);
 	if (data->b)

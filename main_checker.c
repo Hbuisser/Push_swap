@@ -16,17 +16,13 @@ int		display_result(t_data *data)
 {
 	int i;
 
-	if (already_in_order(data) > 0)
-	{
-		write(1, "OK\n", 3);
-		return (1);
-	}
 	i = 0;
 	while (i < data->len_a - 1)
 	{
 		if (data->a[i] > data->a[i + 1])
 		{
 			write(1, "KO\n", 3);
+			free_all(data);
 			return (-1);
 		}
 		i++;
@@ -34,11 +30,18 @@ int		display_result(t_data *data)
 	if (data->len_b == 0)
 	{
 		write(1, "OK\n", 3);
+		free_all(data);
 		return (1);
 	}
 	write(1, "KO\n", 3);
 	free_all(data);
 	return (0);
+}
+
+int		print_error(void)
+{
+	write(1, "Error\n", 6);
+	return (-1);
 }
 
 int		get_instruc(t_data *data, char **instruct, int i)
@@ -65,11 +68,8 @@ int		get_instruc(t_data *data, char **instruct, int i)
 		return (rrb(data));
 	else if (!ft_strncmp(instruct[i], "rrr", 4))
 		return (rrr(data));
-	else 
-	{
-		write(1, "Error\n", 6);
-		return (-1);
-	}
+	else
+		return (print_error());
 	return (1);
 }
 
@@ -101,12 +101,10 @@ int		main(int argc, char **argv)
 		return (0);
 	if (parse(&data, argv, argc) < 0)
 		return (free_all(&data));
-	// if (already_in_order(&data) > 0)
-	// 	return (free_all(&data));
 	while (1)
 	{
 		instruct = get_next_line(0, &line);
-		data.line = ft_strjoin(data.line, line);
+		data.line = ft_strjoin_free_first(data.line, line);
 		data.line = ft_strjoin_free_first(data.line, "\n");
 		free(line);
 		if (instruct == 0)

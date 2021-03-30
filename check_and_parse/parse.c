@@ -83,7 +83,6 @@ int		parse_stack_string(t_data *data, char **argv)
 	}
 	if (!(data->b = (int *)malloc(sizeof(int) * len)))
 		return (-1);
-	ft_bzero(data->b, len);
 	if (check_digit(len, tab, 0))
 		return (-1);
 	if (check_double_string(tab) > 0)
