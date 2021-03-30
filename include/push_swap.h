@@ -90,10 +90,11 @@ int				hard_5(t_data *data);
 *** PUSH_ALGO
 */
 
-int				main_algo(t_data *data);
+int				get_nbr_chunck(int size);
+int				push_algo(t_data *data);
 int				push_to_b(t_data *data);
 int				push_to_a(t_data *data);
-int				compare_with_chunk(t_data *data, int iter);
+int				compare_with_chunk(t_data *data, int iter, int i);
 int				small_bash(t_data *data);
 
 /*

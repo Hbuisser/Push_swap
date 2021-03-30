@@ -12,24 +12,37 @@
 
 #include "include/push_swap.h"
 
-void	push_if_in_chunk(t_data *data, int k)
+int		in_second_chunk(t_data *data)
+{
+	int push;
+
+	pb(data);
+	write(1, "pb\n", 3);
+	rb(data);
+	write(1, "rb\n", 3);
+	push = 1;
+	return (push);
+}
+
+void	push_if_in_chunk(t_data *data, int iter, int i)
 {
 	int j;
-	int l;
 	int push;
 
 	push = 0;
 	j = 0;
-	l = k;
 	while (j < data->len_chunk + 1 && data->len_a > 0)
 	{
-		if ((data->a[0] == data->sorted_arr[l]) && (push == 0))
+		if ((data->a[0] == data->sorted_arr[iter]) && (push == 0))
 		{
 			pb(data);
 			write(1, "pb\n", 3);
 			push = 1;
 		}
-		l++;
+		else if (data->chunk_step[i] && (data->a[0] ==
+			data->sorted_arr[iter + data->len_chunk]) && (push == 0))
+			push = in_second_chunk(data);
+		iter++;
 		j++;
 	}
 	if (push == 0)
@@ -39,20 +52,17 @@ void	push_if_in_chunk(t_data *data, int k)
 	}
 }
 
-int		compare_with_chunk(t_data *data, int iter)
+int		compare_with_chunk(t_data *data, int iter, int i)
 {
-	int i;
+	int j;
 	int len;
-	int k;
 
-	i = 0;
+	j = 0;
 	len = data->len_a;
-	k = 0;
-	k = k + iter;
-	while (i < len)
+	while (j < len)
 	{
-		push_if_in_chunk(data, k);
-		i++;
+		push_if_in_chunk(data, iter, i);
+		j++;
 	}
 	return (1);
 }
@@ -66,9 +76,33 @@ int		push_to_b(t_data *data)
 	i = 0;
 	while (i < data->nb_chunk)
 	{
-		compare_with_chunk(data, iter);
-		iter = iter + data->len_chunk + 1;
+		compare_with_chunk(data, iter, i);
+		iter = iter + (data->len_chunk * 2) + 1;
 		i++;
 	}
+	return (1);
+}
+
+int		push_algo(t_data *data)
+{
+	int i;
+	int j;
+
+	data->nb_chunk = get_nbr_chunck(data->len_a);
+	data->sorted_arr = get_sorted_array(data->a, data->len_a);
+	data->len_chunk = data->len_a / data->nb_chunk;
+	if (!(data->chunk_step = (int *)malloc(sizeof(int) * data->nb_chunk)))
+		return (-1);
+	i = 0;
+	j = data->len_chunk;
+	while (i < data->nb_chunk - 1)
+	{
+		data->chunk_step[i] = j;
+		j = j + data->len_chunk;
+		i++;
+	}
+	data->chunk_step[i] = data->len_a - 1;
+	push_to_b(data);
+	push_to_a(data);
 	return (1);
 }

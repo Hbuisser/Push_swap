@@ -22,30 +22,6 @@ int		get_nbr_chunck(int size)
 		return (11);
 }
 
-int		main_algo(t_data *data)
-{
-	int i;
-	int j;
-
-	data->nb_chunk = get_nbr_chunck(data->len_a);
-	data->sorted_arr = get_sorted_array(data->a, data->len_a);
-	data->len_chunk = data->len_a / data->nb_chunk;
-	if (!(data->chunk_step = (int *)malloc(sizeof(int) * data->nb_chunk)))
-		return (-1);
-	i = 0;
-	j = data->len_chunk;
-	while (i < data->nb_chunk - 1)
-	{
-		data->chunk_step[i] = j;
-		j = j + data->len_chunk;
-		i++;
-	}
-	data->chunk_step[i] = data->len_a - 1;
-	push_to_b(data);
-	push_to_a(data);
-	return (1);
-}
-
 int		small_bash(t_data *data)
 {
 	int tmp;
@@ -77,7 +53,7 @@ int		main(int argc, char **argv)
 		small_bash(&data);
 	else
 	{
-		if (main_algo(&data) < 0)
+		if (push_algo(&data) < 0)
 			return (0);
 	}
 	if (!ft_strncmp(argv[1], "-v", 2))
