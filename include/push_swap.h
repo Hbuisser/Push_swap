@@ -72,7 +72,7 @@ int				*get_sorted_array(int *arr, int n);
 *** MAIN_END
 */
 
-int				check_double_string(t_data *data, char **tab, char **argv);
+int				check_double_string(char **tab);
 void			free_tab(char **tab);
 int				free_all(t_data *data);
 void			debug(t_data *data);
