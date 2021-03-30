@@ -50,22 +50,18 @@ int		parse_stack(t_data *data, char **argv, int argc)
 	return (1);
 }
 
-int		get_len(t_data *data, char **argv)
+int		get_len(t_data *data, char **tab)
 {
-	int len;
+	int i;
 	int j;
 
+	data->len_a = 0;
+	i = 0;
 	j = 0;
-	len = 0;
-	while (argv[data->i][j])
-	{
-		if (argv[data->i][j] == ' ')
-			len++;
-		j++;
-	}
-	len++;
-	data->len_a = len;
-	return (len);
+	while (tab[i] != NULL)
+		i++;
+	data->len_a = i;
+	return (i);
 }
 
 int		parse_stack_string(t_data *data, char **argv)
@@ -76,7 +72,7 @@ int		parse_stack_string(t_data *data, char **argv)
 
 	data->string_bool = 1;
 	tab = ft_split(argv[data->i], ' ');
-	len = get_len(data, argv);
+	len = get_len(data, tab);
 	if (!(data->a = (int *)malloc(sizeof(int) * len)))
 		return (-1);
 	i = 0;
@@ -90,6 +86,8 @@ int		parse_stack_string(t_data *data, char **argv)
 	ft_bzero(data->b, len);
 	if (check_digit(len, tab, 0))
 		return (-1);
+	// if (check_double_string(data, tab, argv) > 0)
+	// 	return (-1);
 	if (check_int_min_max_tab(tab) < 1)
 		return (-1);
 	free_tab(tab);

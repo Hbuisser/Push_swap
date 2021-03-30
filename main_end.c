@@ -12,6 +12,33 @@
 
 #include "include/push_swap.h"
 
+int		check_double_string(t_data *data, char **tab, char **argv)
+{
+	size_t j;
+	size_t k;
+
+	j = 0;
+	k = 0;
+	while (j < ft_strlen(argv[data->i]))
+	{
+		k = j + 1;
+		while (tab[k] != NULL && k < ft_strlen(argv[data->i]))
+		{
+	write(1, "couc\n", 5);
+	printf("tabj%s\n", tab[j]);
+	printf("tabj%s\n", tab[k]);
+			if ((!(ft_strcmp(tab[j], tab[k]))))
+			{
+				write(1, "Error\n", 6);
+				return (1);
+			}
+			k++;
+		}
+		j++;
+	}
+	return (0);
+}
+
 void	free_tab(char **tab)
 {
 	int i;

@@ -72,6 +72,7 @@ int				*get_sorted_array(int *arr, int n);
 *** MAIN_END
 */
 
+int				check_double_string(t_data *data, char **tab, char **argv);
 void			free_tab(char **tab);
 int				free_all(t_data *data);
 void			debug(t_data *data);
@@ -101,9 +102,9 @@ int				small_bash(t_data *data);
 *** INSTRUCTIONS
 */
 
-void			sa(t_data *data);
-void			sb(t_data *data);
-void			ss(t_data *data);
+int				sa(t_data *data);
+int				sb(t_data *data);
+int				ss(t_data *data);
 int				pa(t_data *data);
 int				pb(t_data *data);
 int				ra(t_data *data);

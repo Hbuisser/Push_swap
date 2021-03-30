@@ -76,6 +76,7 @@ t_list				*ft_lstmap(t_list *lst, void *(*f)(void *),
 int					ft_isspace(int c);
 int					ft_strcmp(const char *s1, const char *s2);
 char				*ft_utoa_base(unsigned long n, const char *base);
+char				**ft_free(char **array, int size);
 int					get_next_line(int fd, char **line);
 
 #endif

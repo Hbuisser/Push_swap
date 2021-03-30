@@ -17,7 +17,7 @@
 *** Do nothing if there is only one or no elements).
 */
 
-void	sa(t_data *data)
+int		sa(t_data *data)
 {
 	int swap_down;
 	int swap_up;
@@ -29,6 +29,7 @@ void	sa(t_data *data)
 		data->a[0] = swap_up;
 		data->a[1] = swap_down;
 	}
+	return (1);
 }
 
 /*
@@ -36,7 +37,7 @@ void	sa(t_data *data)
 ** Do nothing if there is only one or no elements).
 */
 
-void	sb(t_data *data)
+int		sb(t_data *data)
 {
 	int swap_down;
 	int swap_up;
@@ -48,14 +49,16 @@ void	sb(t_data *data)
 		data->b[0] = swap_up;
 		data->b[1] = swap_down;
 	}
+	return (1);
 }
 
 /*
 *** ss : sa and sb at the same time.
 */
 
-void	ss(t_data *data)
+int		ss(t_data *data)
 {
 	sa(data);
 	sb(data);
+	return (1);
 }

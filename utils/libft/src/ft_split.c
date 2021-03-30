@@ -12,79 +12,82 @@
 
 #include "../include/libft.h"
 
-static int	ft_malloc_s(char const *s, char c)
+static int		is_separator(char s, char c)
 {
-	int a;
-	int counter;
-
-	a = 0;
-	counter = 0;
-	while (s[a] != '\0')
-	{
-		while (s[a] != '\0' && s[a] == c)
-			a++;
-		if (s[a] != '\0' && s[a] != c)
-		{
-			counter++;
-			while (s[a] != '\0' && s[a] != c)
-				a++;
-		}
-	}
-	return (counter);
+	if (s == c)
+		return (1);
+	return (0);
 }
 
-static void	ft_free(char **tab)
+static int		is_word(char s1, char s2, char c)
 {
+	if (!is_separator(s1, c) && is_separator(s2, c))
+		return (1);
+	else
+		return (0);
+}
+
+static int		count_w(const char *str, char c)
+{
+	int count;
 	int i;
 
 	i = 0;
-	while (tab[i] != NULL)
+	count = 0;
+	while (str[i] != '\0')
 	{
-		free(tab[i]);
+		if (is_word(str[i], str[i - 1], c) || i == 0)
+			count++;
 		i++;
 	}
-	free(tab);
+	return (count);
 }
 
-static char	*ft_write(char const *s, char c, char **tab)
+char			*malloc_word(const char *str, char c)
 {
-	size_t			i;
-	unsigned int	j;
-	char			*dest;
+	char*word;
+	int i;
 
 	i = 0;
-	j = 0;
-	while (s[i] && s[i] != c)
+	while (str[i] != '\0' && !is_separator(str[i], c))
 		i++;
-	dest = ft_substr(s, j, i);
-	if (dest == NULL)
-		ft_free(tab);
-	return (dest);
+	if (!(word = (char *)malloc(sizeof(char) * (i + 1))))
+		return (0);
+	i = 0;
+	while (str[i] != '\0' && !is_separator(str[i], c))
+	{
+		word[i] = str[i];
+		i++;
+	}
+	word[i] = '\0';
+	return (word);
 }
 
-char		**ft_split(char const *s, char c)
+char			**ft_split(char const *s, char c)
 {
+	char	**array;
 	int		i;
 	int		j;
-	char	**tab;
 
 	i = 0;
 	j = 0;
-	if (s == NULL)
+	if (s == NULL || c < 0)
 		return (NULL);
-	if (!(tab = malloc((ft_malloc_s(s, c) + 2) * sizeof(char*))))
-		return (NULL);
-	while (s[i])
+	if (!(array = (char **)malloc(sizeof(char *) * count_w(s, c) + 1)))
+		return (0);
+	while (*s)
 	{
-		while (s[i] == c)
-			i++;
-		if (s[i] && s[i] != c)
+		while (*s && is_separator(*s, c))
+			s++;
+		if (*s && !is_separator(*s, c))
 		{
-			tab[j++] = ft_write(&s[i], c, tab);
-			while (s[i] != c && s[i])
-				i++;
+			if ((array[i] = malloc_word(s, c)) == NULL)
+				return (ft_free(array, i));
+			i++;
+			while (*s && !is_separator(*s, c))
+				s++;
 		}
 	}
-	tab[j] = (NULL);
-	return (tab);
+	array[i] = NULL;
+	return (array);
 }

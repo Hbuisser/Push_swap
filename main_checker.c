@@ -37,33 +37,40 @@ int		display_result(t_data *data)
 		return (1);
 	}
 	write(1, "KO\n", 3);
+	free_all(data);
 	return (0);
 }
 
-void	get_instruc(t_data *data, char **instruct, int i)
+int		get_instruc(t_data *data, char **instruct, int i)
 {
 	if (!ft_strncmp(instruct[i], "sa", 3))
-		sa(data);
+		return (sa(data));
 	else if (!ft_strncmp(instruct[i], "sb", 3))
-		sb(data);
+		return (sb(data));
 	else if (!ft_strncmp(instruct[i], "ss", 3))
-		ss(data);
+		return (ss(data));
 	else if (!ft_strncmp(instruct[i], "pa", 3))
-		pa(data);
+		return (pa(data));
 	else if (!ft_strncmp(instruct[i], "pb", 3))
-		pb(data);
+		return (pb(data));
 	else if (!ft_strncmp(instruct[i], "ra", 3))
-		ra(data);
+		return (ra(data));
 	else if (!ft_strncmp(instruct[i], "rb", 3))
-		rb(data);
+		return (rb(data));
 	else if (!ft_strncmp(instruct[i], "rr", 3))
-		rr(data);
+		return (rr(data));
 	else if (!ft_strncmp(instruct[i], "rra", 4))
-		rra(data);
+		return (rra(data));
 	else if (!ft_strncmp(instruct[i], "rrb", 4))
-		rrb(data);
+		return (rrb(data));
 	else if (!ft_strncmp(instruct[i], "rrr", 4))
-		rrr(data);
+		return (rrr(data));
+	else 
+	{
+		write(1, "Error\n", 6);
+		return (-1);
+	}
+	return (1);
 }
 
 int		exec_instruct(t_data *data)
@@ -75,7 +82,8 @@ int		exec_instruct(t_data *data)
 	i = 0;
 	while (instruct && instruct[i])
 	{
-		get_instruc(data, instruct, i);
+		if (get_instruc(data, instruct, i) < 0)
+			return (-1);
 		i++;
 	}
 	free_tab(instruct);
@@ -93,8 +101,8 @@ int		main(int argc, char **argv)
 		return (0);
 	if (parse(&data, argv, argc) < 0)
 		return (free_all(&data));
-	if (already_in_order(&data) > 0)
-		return (free_all(&data));
+	// if (already_in_order(&data) > 0)
+	// 	return (free_all(&data));
 	while (1)
 	{
 		instruct = get_next_line(0, &line);
@@ -104,10 +112,10 @@ int		main(int argc, char **argv)
 		if (instruct == 0)
 			break ;
 	}
-	exec_instruct(&data);
+	if (exec_instruct(&data) < 0)
+		return (0);
 	if (!ft_strncmp(argv[1], "-v", 2))
 		debug(&data);
 	display_result(&data);
-	free_all(&data);
 	return (0);
 }

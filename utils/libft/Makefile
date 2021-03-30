@@ -50,6 +50,7 @@ SRCSC		= src/ft_memset.c \
 				src/ft_strcmp.c \
 				src/ft_isspace.c \
 				src/ft_utoa_base.c \
+				src/ft_free.c \
 				src/get_next_line.c
 
 SBONUS		= src/ft_lstadd_front.c\
