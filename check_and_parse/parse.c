@@ -46,10 +46,7 @@ int		parse_stack(t_data *data, char **argv, int argc)
 		return (-1);
 	ft_bzero(data->b, data->init_len);
 	if (check_digit(argc, argv, data->i))
-	{
-		write(1, "Error\n", 6);
 		return (-1);
-	}
 	return (1);
 }
 
@@ -91,6 +88,8 @@ int		parse_stack_string(t_data *data, char **argv)
 	if (!(data->b = (int *)malloc(sizeof(int) * len)))
 		return (-1);
 	ft_bzero(data->b, len);
+	if (check_digit(len, tab, 0))
+		return (-1);
 	if (check_int_min_max_tab(tab) < 1)
 		return (-1);
 	free_tab(tab);

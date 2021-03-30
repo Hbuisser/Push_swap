@@ -43,7 +43,10 @@ int		check_digit(int argc, char **argv, int i)
 		while (argv[i][j])
 		{
 			if (!ft_isdigit(argv[i][j]))
+			{
+				write(1, "Error\n", 6);
 				return (-1);
+			}
 			j++;
 		}
 		j = 0;
