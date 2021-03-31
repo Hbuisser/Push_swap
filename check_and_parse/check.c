@@ -48,12 +48,7 @@ int	check_max(t_data *data, int nb, char **argv)
 	int	i;
 
 	i = 0;
-	if (data->string_bool == 1)
-	{
-		if (check_int_min_max(argv[nb]) < 1)
-			return (-1);
-	}
-	else
+	if (data->string_bool == 0)
 	{
 		while (i < data->init_len)
 		{

@@ -33,23 +33,19 @@ void	bring_above(t_data *data)
 	}
 }
 
-int	check_digit(int argc, char **argv, int i)
+int	check_digit(char *arg)
 {
-	int	j;
-
-	j = 0;
-	while (i < argc)
+	int	i;
+	i = 0;
+	if (arg && arg[i] && arg[i] == '-')
+		i++;
+	while (arg && arg[i])
 	{
-		while (argv[i][j])
+		if (arg[i] < '0' || arg[i] > '9')
 		{
-			if (!ft_isdigit(argv[i][j]))
-			{
-				write(2, "Error\n", 6);
-				return (-1);
-			}
-			j++;
+			write(2, "Error\n", 6);
+			return (-1);
 		}
-		j = 0;
 		i++;
 	}
 	return (0);

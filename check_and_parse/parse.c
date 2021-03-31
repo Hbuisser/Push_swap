@@ -47,8 +47,14 @@ int	parse_stack(t_data *data, char **argv, int argc)
 	if (!data->b)
 		return (-1);
 	ft_bzero(data->b, data->init_len);
-	if (check_digit(argc, argv, data->i))
-		return (-1);
+	i = data->i;
+	while (argv[i])
+	{
+		if (check_digit(argv[i]))
+			return (-1);
+		i++;
+	}
+	argc = 0;
 	return (1);
 }
 
@@ -87,8 +93,13 @@ int	parse_stack_string(t_data *data, char **argv)
 	data->b = (int *)malloc(sizeof(int) * len);
 	if (!data->b)
 		return (-1);
-	if (check_digit(len, tab, 0))
-		return (-1);
+	i = 0;
+	while(tab[i])
+	{
+		if (check_digit(tab[i]))
+			return (-1);
+		i++;
+	}
 	if (check_int_min_max_tab(tab) < 1)
 		return (-1);
 	free_tab(tab);

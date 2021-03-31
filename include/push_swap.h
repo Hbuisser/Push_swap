@@ -50,7 +50,7 @@ void			init_struct(t_data *data, int argc, char **argv);
 */
 
 int				check_double(t_data *data, char **argv);
-int				check_digit(int argc, char **argv, int i);
+int				check_digit(char *arg);
 int				check_int_min_max(char *str);
 int				check_int_min_max_tab(char **tab);
 int				check_max(t_data *data, int nb, char **argv);

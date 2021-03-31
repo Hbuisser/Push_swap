@@ -23,7 +23,7 @@ int	display_result(t_data *data)
 		{
 			write(1, "KO\n", 3);
 			free_all(data);
-			return (-1);
+			return (1);
 		}
 		i++;
 	}
@@ -35,7 +35,7 @@ int	display_result(t_data *data)
 	}
 	write(1, "KO\n", 3);
 	free_all(data);
-	return (0);
+	return (1);
 }
 
 int	print_error(void)
@@ -98,7 +98,7 @@ int	main(int argc, char **argv)
 
 	init_struct(&data, argc, argv);
 	if (check(&data, argv, argc) < 0)
-		return (0);
+		return (1);
 	if (parse(&data, argv, argc) < 0)
 		return (free_all(&data));
 	while (1)
@@ -111,9 +111,9 @@ int	main(int argc, char **argv)
 			break ;
 	}
 	if (exec_instruct(&data) < 0)
-		return (0);
+		return (1);
 	if (!ft_strncmp(argv[1], "-v", 2))
 		debug(&data);
 	display_result(&data);
-	return (0);
+	return (1);
 }
