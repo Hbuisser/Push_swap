@@ -34,7 +34,7 @@ int	main(int argc, char **argv)
 
 	init_struct(&data, argc, argv);
 	if (check(&data, argv, argc) < 0)
-		return (0);
+		return (1);
 	if (parse(&data, argv, argc) < 0)
 		return (free_all(&data));
 	if (already_in_order(&data) > 0)

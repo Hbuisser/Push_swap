@@ -39,12 +39,12 @@ void	push_if_in_chunk(t_data *data, int iter)
 			write(1, "pb\n", 3);
 			push = 1;
 		}
-		else if (iter + data->len_chunk > data->len_a)
-		{
-			pb(data);
-			write(1, "pb\n", 3);
-			push = 1;
-		}
+		// else if ((iter + data->len_chunk) > data->len_a)
+		// {
+		// 	pb(data);
+		// 	write(1, "pb\n", 3);
+		// 	push = 1;
+		// }
 		else if ((data->a[0] == data->sorted_arr[iter + data->len_chunk])
 			&& (push == 0))
 			push = in_second_chunk(data);

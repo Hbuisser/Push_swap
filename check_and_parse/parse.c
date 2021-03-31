@@ -97,11 +97,17 @@ int	parse_stack_string(t_data *data, char **argv)
 	while(tab[i])
 	{
 		if (check_digit(tab[i]))
+		{
+			free_tab(tab);
 			return (-1);
+		}
 		i++;
 	}
 	if (check_int_min_max_tab(tab) < 1)
+	{
+		free_tab(tab);
 		return (-1);
+	}
 	free_tab(tab);
 	return (0);
 }

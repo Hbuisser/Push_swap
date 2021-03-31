@@ -22,23 +22,26 @@ int	ra(t_data *data)
 	int	i;
 	int	*tmp;
 
-	tmp = (int *)malloc(sizeof(int) * data->len_a);
-	if (!tmp)
-		return (0);
-	i = 0;
-	while (i < data->len_a)
+	if (data->len_a > 0)
 	{
-		tmp[i] = data->a[i];
-		i++;
+		tmp = (int *)malloc(sizeof(int) * data->len_a);
+		if (!tmp)
+			return (0);
+		i = 0;
+		while (i < data->len_a)
+		{
+			tmp[i] = data->a[i];
+			i++;
+		}
+		i = data->len_a - 1;
+		data->a[i] = tmp[0];
+		while (i > 0)
+		{
+			data->a[i - 1] = tmp[i];
+			i--;
+		}
+		free(tmp);
 	}
-	i = data->len_a - 1;
-	data->a[i] = tmp[0];
-	while (i > 0)
-	{
-		data->a[i - 1] = tmp[i];
-		i--;
-	}
-	free(tmp);
 	return (1);
 }
 
@@ -52,23 +55,26 @@ int	rb(t_data *data)
 	int	i;
 	int	*tmp;
 
-	tmp = (int *)malloc(sizeof(int) * data->len_b);
-	if (!tmp)
-		return (0);
-	i = 0;
-	while (i < data->len_b)
+	if (data->len_b > 0)
 	{
-		tmp[i] = data->b[i];
-		i++;
+		tmp = (int *)malloc(sizeof(int) * data->len_b);
+		if (!tmp)
+			return (0);
+		i = 0;
+		while (i < data->len_b)
+		{
+			tmp[i] = data->b[i];
+			i++;
+		}
+		i = data->len_b - 1;
+		data->b[i] = tmp[0];
+		while (i > 0)
+		{
+			data->b[i - 1] = tmp[i];
+			i--;
+		}
+		free(tmp);
 	}
-	i = data->len_b - 1;
-	data->b[i] = tmp[0];
-	while (i > 0)
-	{
-		data->b[i - 1] = tmp[i];
-		i--;
-	}
-	free(tmp);
 	return (1);
 }
 

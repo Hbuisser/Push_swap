@@ -44,6 +44,7 @@ typedef struct s_data
 */
 
 void			init_struct(t_data *data, int argc, char **argv);
+int				free_line(t_data *data);
 
 /*
 *** CHECKS
