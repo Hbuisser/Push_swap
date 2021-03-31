@@ -12,7 +12,7 @@
 
 #include "../include/libft.h"
 
-int		ft_isinset(int c, char *set)
+int	ft_isinset(int c, char *set)
 {
 	while (set && *set)
 	{

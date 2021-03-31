@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_push.c                                        :+:      :+:    :+:   */
+/*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hbuisser <hbuisser@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,44 +10,56 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "include/push_swap.h"
+#include "../include/libft.h"
 
-int	small_bash(t_data *data)
+int	ft_free_g(char **string, int nb)
 {
-	int	tmp;
-
-	tmp = 0;
-	if (data->len_a == 2)
-		hard_2(data);
-	else if (data->len_a == 3)
-		hard_3(data);
-	else if (data->len_a == 4)
-		hard_4(data);
-	else if (data->len_a == 5)
-		hard_5(data);
-	return (0);
+	if (*string)
+	{
+		free(*string);
+		*string = NULL;
+	}
+	return (nb);
 }
 
-int	main(int argc, char **argv)
+char	*ft_strchr_g(const char *str, int c)
 {
-	t_data	data;
+	int			i;
 
-	init_struct(&data, argc, argv);
-	if (check(&data, argv, argc) < 0)
-		return (0);
-	if (parse(&data, argv, argc) < 0)
-		return (free_all(&data));
-	if (already_in_order(&data) > 0)
-		return (free_all(&data));
-	if (data.len_a < 6)
-		small_bash(&data);
-	else
+	i = 0;
+	if (str == NULL)
+		return (NULL);
+	while (str[i])
 	{
-		if (push_algo(&data) < 0)
-			return (0);
+		if (str[i] == (unsigned char)c)
+			return ((char *)&str[i] + 1);
+		i++;
 	}
-	if (!ft_strncmp(argv[1], "-v", 2))
-		debug(&data);
-	free_all(&data);
-	return (1);
+	if (c == 0)
+		return ((char *)&str[i] + 1);
+	return (NULL);
+}
+
+char	*ft_strndup_g(const char *str, const char c)
+{
+	int			i;
+	int			j;
+	char		*src;
+
+	i = 0;
+	j = 0;
+	if (str == NULL)
+		return (ft_strndup_g("", '\0'));
+	while (str[j] != c)
+		j++;
+	src = malloc((j + 1) * sizeof(*src));
+	if (src == NULL)
+		return (NULL);
+	while (str[i] != '\0' && str[i] != c)
+	{
+		src[i] = str[i];
+		i++;
+	}
+	src[i] = '\0';
+	return (src);
 }

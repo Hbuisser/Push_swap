@@ -12,28 +12,46 @@
 
 #include "../include/libft.h"
 
-int	ft_atoi(const char *str)
+static int	ft_long(int signe)
+{
+	if (signe == -1)
+		return (0);
+	else
+		return (-1);
+}
+
+static int	ft_return(unsigned long long result, int signe)
+{
+	if (signe == -1 && (result - 1) == 9223372036854775807)
+		return (result * signe);
+	if (result > 9223372036854775807)
+		return (ft_long(signe));
+	return (result * signe);
+}
+
+long long	ft_atoi(const char *str)
 {
 	int					i;
 	int					signe;
-	unsigned long long	prev;
-	unsigned long long	digit;
+	unsigned long long	result;
 
-	i = 0;
-	prev = 0;
-	digit = 0;
+	result = 0;
 	signe = 1;
-	while (str[i] == ' ' || str[i] == '\n' || str[i] == '\r' || str[i] == '\t'
-		|| str[i] == '\v' || str[i] == '\f')
+	i = 0;
+	while (str[i] == ' ' || (str[i] > 8 && str[i] < 14))
 		i++;
 	if (str[i] == '-' || str[i] == '+')
-		signe = (str[i++] == '-') ? -1 : 1;
-	while (str[i] > 47 && str[i] < 58)
 	{
-		digit = digit * 10 + (str[i++] - '0');
-		if (digit < prev || digit >= 9223372036854775807)
-			return ((signe == -1) ? 0 : -1);
-		prev = digit;
+		if (str[i] == '-')
+			signe = -1;
+		i++;
 	}
-	return (digit * signe);
+	if (!(str[i] >= '0' && str[i] <= '9'))
+		return (0);
+	while (str[i] >= '0' && str[i] <= '9')
+	{
+		result = result * 10 + (str[i] - 48);
+		i++;
+	}
+	return (ft_return(result, signe));
 }

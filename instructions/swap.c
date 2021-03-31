@@ -17,10 +17,10 @@
 *** Do nothing if there is only one or no elements).
 */
 
-int		sa(t_data *data)
+int	sa(t_data *data)
 {
-	int swap_down;
-	int swap_up;
+	int	swap_down;
+	int	swap_up;
 
 	if (data->len_a > 1)
 	{
@@ -37,10 +37,10 @@ int		sa(t_data *data)
 ** Do nothing if there is only one or no elements).
 */
 
-int		sb(t_data *data)
+int	sb(t_data *data)
 {
-	int swap_down;
-	int swap_up;
+	int	swap_down;
+	int	swap_up;
 
 	if (data->len_b > 1)
 	{
@@ -56,7 +56,7 @@ int		sb(t_data *data)
 *** ss : sa and sb at the same time.
 */
 
-int		ss(t_data *data)
+int	ss(t_data *data)
 {
 	sa(data);
 	sb(data);

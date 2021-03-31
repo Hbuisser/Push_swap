@@ -17,12 +17,13 @@
 *** Do nothing if b is empty.
 */
 
-int		*get_tmp_a(t_data *data)
+int	*get_tmp_a(t_data *data)
 {
-	int *tmp;
-	int i;
+	int	*tmp;
+	int	i;
 
-	if (!(tmp = (int *)malloc(sizeof(int) * data->len_a - 1)))
+	tmp = (int *)malloc(sizeof(int) * data->len_a);
+	if (!tmp)
 		return (0);
 	i = 0;
 	while (i < data->len_a)
@@ -33,11 +34,11 @@ int		*get_tmp_a(t_data *data)
 	return (tmp);
 }
 
-int		pa(t_data *data)
+int	pa(t_data *data)
 {
-	int i;
-	int j;
-	int *tmp;
+	int	i;
+	int	j;
+	int	*tmp;
 
 	if (data->len_b == 0)
 		return (1);
@@ -53,12 +54,12 @@ int		pa(t_data *data)
 	}
 	free(tmp);
 	i = 0;
+	data->len_b -= 1;
 	while (i < data->len_b)
 	{
 		data->b[i] = data->b[i + 1];
 		i++;
 	}
-	data->len_b -= 1;
 	return (1);
 }
 
@@ -67,12 +68,13 @@ int		pa(t_data *data)
 *** Do nothing if a is empty.
 */
 
-int		*get_tmp_b(t_data *data)
+int	*get_tmp_b(t_data *data)
 {
-	int *tmp;
-	int i;
+	int	*tmp;
+	int	i;
 
-	if (!(tmp = (int *)malloc(sizeof(int) * data->len_b)))
+	tmp = (int *)malloc(sizeof(int) * data->len_b);
+	if (!tmp)
 		return (0);
 	i = 0;
 	while (i < data->len_b)
@@ -83,11 +85,11 @@ int		*get_tmp_b(t_data *data)
 	return (tmp);
 }
 
-int		pb(t_data *data)
+int	pb(t_data *data)
 {
-	int i;
-	int j;
-	int *tmp;
+	int	i;
+	int	j;
+	int	*tmp;
 
 	if (data->len_a == 0)
 		return (1);
@@ -103,11 +105,11 @@ int		pb(t_data *data)
 	}
 	free(tmp);
 	i = 0;
+	data->len_a -= 1;
 	while (i < data->len_a)
 	{
 		data->a[i] = data->a[i + 1];
 		i++;
 	}
-	data->len_a -= 1;
 	return (1);
 }

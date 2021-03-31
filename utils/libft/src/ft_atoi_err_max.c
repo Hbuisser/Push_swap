@@ -14,7 +14,7 @@
 
 int	ft_manage_longmin(unsigned long result, int count)
 {
-	int value;
+	int	value;
 
 	if (count % 2 != 0)
 		value = -1;
@@ -38,8 +38,8 @@ int	ft_atoi_err_max(const char *str)
 	i = 0;
 	count = 0;
 	result = 0;
-	while (str[i] == '\t' || str[i] == '\v' || str[i] == '\n' ||
-	str[i] == '\r' || str[i] == '\f' || str[i] == ' ')
+	while (str[i] == '\t' || str[i] == '\v' || str[i] == '\n' || str[i]
+		== '\r' || str[i] == '\f' || str[i] == ' ')
 		i++;
 	if (str[i] == '-' || str[i] == '+')
 	{

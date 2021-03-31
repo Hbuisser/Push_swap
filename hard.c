@@ -24,15 +24,15 @@ int	hard_2(t_data *data)
 
 int	hard_3_bis(t_data *data)
 {
-	if (data->a[0] > data->a[1] && data->a[1] < data->a[2] &&
-		data->a[2] < data->a[0])
+	if (data->a[0] > data->a[1] && data->a[1] < data->a[2]
+		&& data->a[2] < data->a[0])
 	{
 		ra(data);
 		write(1, "ra\n", 3);
 		return (1);
 	}
-	else if (data->a[0] < data->a[1] && data->a[1] > data->a[2] &&
-		data->a[2] > data->a[0])
+	else if (data->a[0] < data->a[1] && data->a[1] > data->a[2]
+		&& data->a[2] > data->a[0])
 	{
 		sa(data);
 		ra(data);
@@ -40,8 +40,8 @@ int	hard_3_bis(t_data *data)
 		write(1, "ra\n", 3);
 		return (1);
 	}
-	else if (data->a[0] < data->a[1] && data->a[1] > data->a[2] &&
-		data->a[2] < data->a[0])
+	else if (data->a[0] < data->a[1] && data->a[1] > data->a[2]
+		&& data->a[2] < data->a[0])
 	{
 		rra(data);
 		write(1, "rra\n", 4);
@@ -54,15 +54,15 @@ int	hard_3(t_data *data)
 {
 	if (data->a[0] < data->a[1] && data->a[1] < data->a[2])
 		return (1);
-	else if (data->a[0] > data->a[1] && data->a[1] < data->a[2] &&
-		data->a[2] > data->a[0])
+	else if (data->a[0] > data->a[1] && data->a[1] < data->a[2]
+		&& data->a[2] > data->a[0])
 	{
 		sa(data);
 		write(1, "sa\n", 3);
 		return (1);
 	}
-	else if (data->a[0] > data->a[1] && data->a[1] > data->a[2] &&
-		data->a[2] < data->a[0])
+	else if (data->a[0] > data->a[1] && data->a[1] > data->a[2]
+		&& data->a[2] < data->a[0])
 	{
 		sa(data);
 		rra(data);

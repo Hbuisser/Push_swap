@@ -11,6 +11,7 @@
 # **************************************************************************** #
 
 SRCS_CHECKER = main_checker.c \
+	init.c \
 	instructions/push.c \
 	instructions/swap.c \
 	instructions/rotate.c \
@@ -23,6 +24,7 @@ SRCS_CHECKER = main_checker.c \
 OBJS_CHECKER = $(SRCS_CHECKER:%.c=%.o)
 
 SRCS_PUSH = main_push.c \
+	init.c \
 	push_algo.c \
 	push_algo2.c \
 	instructions/push.c \

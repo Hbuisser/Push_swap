@@ -12,9 +12,9 @@
 
 #include "include/push_swap.h"
 
-int		display_result(t_data *data)
+int	display_result(t_data *data)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < data->len_a - 1)
@@ -38,13 +38,13 @@ int		display_result(t_data *data)
 	return (0);
 }
 
-int		print_error(void)
+int	print_error(void)
 {
-	write(1, "Error\n", 6);
+	write(2, "Error\n", 6);
 	return (-1);
 }
 
-int		get_instruc(t_data *data, char **instruct, int i)
+int	get_instruc(t_data *data, char **instruct, int i)
 {
 	if (!ft_strncmp(instruct[i], "sa", 3))
 		return (sa(data));
@@ -73,7 +73,7 @@ int		get_instruc(t_data *data, char **instruct, int i)
 	return (1);
 }
 
-int		exec_instruct(t_data *data)
+int	exec_instruct(t_data *data)
 {
 	int		i;
 	char	**instruct;
@@ -90,7 +90,7 @@ int		exec_instruct(t_data *data)
 	return (1);
 }
 
-int		main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	t_data	data;
 	int		instruct;

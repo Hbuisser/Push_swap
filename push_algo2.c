@@ -12,7 +12,7 @@
 
 #include "include/push_swap.h"
 
-int		put_at_first_place(t_data *data, int half, int index)
+int	put_at_first_place(t_data *data, int half, int index)
 {
 	if (half == 1)
 	{
@@ -35,10 +35,10 @@ int		put_at_first_place(t_data *data, int half, int index)
 	return (1);
 }
 
-int		get_half(t_data *data, int index)
+int	get_half(t_data *data, int index)
 {
-	int half;
-	int middle;
+	int	half;
+	int	middle;
 
 	middle = data->len_b / 2;
 	if (index < middle)
@@ -48,11 +48,11 @@ int		get_half(t_data *data, int index)
 	return (half);
 }
 
-int		find_max(t_data *data)
+int	find_max(t_data *data)
 {
-	int i;
-	int len;
-	int index;
+	int	i;
+	int	len;
+	int	index;
 
 	index = 0;
 	len = data->len_b;
@@ -66,11 +66,11 @@ int		find_max(t_data *data)
 	return (index);
 }
 
-int		push_to_a(t_data *data)
+int	push_to_a(t_data *data)
 {
-	int i;
-	int index;
-	int half;
+	int	i;
+	int	index;
+	int	half;
 
 	i = 0;
 	while (i < data->len_b)

@@ -12,11 +12,11 @@
 
 #include "include/push_swap.h"
 
-int		check_double_string(char **tab)
+int	check_double_string(char **tab)
 {
-	size_t len;
-	size_t j;
-	size_t k;
+	size_t	len;
+	size_t	j;
+	size_t	k;
 
 	j = 0;
 	k = 0;
@@ -30,7 +30,7 @@ int		check_double_string(char **tab)
 		{
 			if (!(ft_strcmp(tab[j], tab[k])))
 			{
-				write(1, "Error\n", 6);
+				write(2, "Error\n", 6);
 				return (1);
 			}
 			k++;
@@ -42,7 +42,7 @@ int		check_double_string(char **tab)
 
 void	free_tab(char **tab)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (tab[i])
@@ -53,7 +53,7 @@ void	free_tab(char **tab)
 	free(tab);
 }
 
-int		free_all(t_data *data)
+int	free_all(t_data *data)
 {
 	if (data->line)
 		free(data->line);
@@ -70,7 +70,7 @@ int		free_all(t_data *data)
 
 void	debug(t_data *data)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < data->len_a)
@@ -86,4 +86,16 @@ void	debug(t_data *data)
 		write(1, "\n", 1);
 		i++;
 	}
+}
+
+int	get_nbr_chunck(int size)
+{
+	if (size < 10)
+		return (2);
+	if (size < 99)
+		return (4);
+	else if (size < 495)
+		return (8);
+	else
+		return (18);
 }

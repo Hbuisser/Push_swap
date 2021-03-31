@@ -12,7 +12,7 @@
 
 #include "../include/libft.h"
 
-char	*ft_strjoin_free_first(char *s1, char const *s2)
+char	*ft_strjoin_free_first(char *s1, char *s2)
 {
 	int		i;
 	int		j;
@@ -20,8 +20,8 @@ char	*ft_strjoin_free_first(char *s1, char const *s2)
 
 	if (s2 == NULL || s1 == NULL)
 		return (NULL);
-	if (!(dest = malloc((ft_strlen((char*)s1) +
-						ft_strlen((char*)s2)) * sizeof(char*))))
+	dest = malloc((ft_strlen(s1) + ft_strlen(s2)) * sizeof(char *));
+	if (dest == NULL)
 		return (NULL);
 	i = 0;
 	j = 0;

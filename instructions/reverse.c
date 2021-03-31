@@ -19,10 +19,11 @@
 
 int	rra(t_data *data)
 {
-	int i;
-	int *tmp;
+	int	i;
+	int	*tmp;
 
-	if (!(tmp = (int *)malloc(sizeof(int) * data->len_a - 1)))
+	tmp = (int *)malloc(sizeof(int) * data->len_a);
+	if (!tmp)
 		return (0);
 	i = 0;
 	while (i < data->len_a)
@@ -48,10 +49,11 @@ int	rra(t_data *data)
 
 int	rrb(t_data *data)
 {
-	int i;
-	int *tmp;
+	int	i;
+	int	*tmp;
 
-	if (!(tmp = (int *)malloc(sizeof(int) * data->len_b - 1)))
+	tmp = (int *)malloc(sizeof(int) * data->len_b);
+	if (!tmp)
 		return (0);
 	i = 0;
 	while (i < data->len_b)

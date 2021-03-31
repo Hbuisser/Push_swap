@@ -12,82 +12,88 @@
 
 #include "../include/libft.h"
 
-static int		is_separator(char s, char c)
+static char	**ft_megafree(char **tab, int y)
 {
-	if (s == c)
-		return (1);
-	return (0);
+	while (--y >= 0)
+		free(tab[y]);
+	free(tab);
+	return (NULL);
 }
 
-static int		is_word(char s1, char s2, char c)
+static int	ft_len_to_sep(char const *str, char c)
 {
-	if (!is_separator(s1, c) && is_separator(s2, c))
-		return (1);
-	else
-		return (0);
-}
-
-static int		count_w(const char *str, char c)
-{
-	int count;
-	int i;
+	int		i;
 
 	i = 0;
-	count = 0;
-	while (str[i] != '\0')
-	{
-		if (is_word(str[i], str[i - 1], c) || i == 0)
-			count++;
+	while (str && str[i] && str[i] != c)
 		i++;
+	return (i);
+}
+
+static int	ft_count_words(char const *str, char c)
+{
+	int	count;
+	int	pos;
+
+	if (str == NULL)
+		return (0);
+	count = 1;
+	if (str[0] == c)
+		count = 0;
+	pos = 0;
+	while (str[pos] && str[pos + 1])
+	{
+		if (str[pos] == c && str[pos + 1] != c)
+			count++;
+		pos++;
 	}
 	return (count);
 }
 
-char			*malloc_word(const char *str, char c)
+static char	*ft_tmp_str(const char *str, char c)
 {
-	char*word;
-	int i;
+	int		i;
+	char	*tmp;
 
 	i = 0;
-	while (str[i] != '\0' && !is_separator(str[i], c))
-		i++;
-	if (!(word = (char *)malloc(sizeof(char) * (i + 1))))
-		return (0);
-	i = 0;
-	while (str[i] != '\0' && !is_separator(str[i], c))
+	tmp = malloc(sizeof(char) * (ft_len_to_sep(str, c) + 1));
+	if (tmp)
 	{
-		word[i] = str[i];
-		i++;
+		while (str[i] != c && str[i] != '\0')
+		{
+			tmp[i] = str[i];
+			i++;
+		}
+		tmp[i] = '\0';
+		return (tmp);
 	}
-	word[i] = '\0';
-	return (word);
+	return (NULL);
 }
 
-char			**ft_split(char const *s, char c)
+char	**ft_split(char const *str, char c)
 {
-	char	**array;
 	int		i;
-	int		j;
+	int		y;
+	char	**split;
 
 	i = 0;
-	j = 0;
-	if (s == NULL || c < 0)
+	y = 0;
+	split = malloc(sizeof(char *) * (ft_count_words(str, c) + 1));
+	if (str == NULL || split == NULL)
 		return (NULL);
-	if (!(array = (char **)malloc(sizeof(char *) * count_w(s, c) + 1)))
-		return (0);
-	while (*s)
+	while (str[i] != '\0')
 	{
-		while (*s && is_separator(*s, c))
-			s++;
-		if (*s && !is_separator(*s, c))
+		if (str[i] != c)
 		{
-			if ((array[i] = malloc_word(s, c)) == NULL)
-				return (ft_free(array, i));
-			i++;
-			while (*s && !is_separator(*s, c))
-				s++;
+			split[y] = ft_tmp_str(&str[i], c);
+			if (!split[y])
+				return (ft_megafree(split, y));
+			i = i + ft_len_to_sep(&str[i], c);
+			y++;
 		}
+		else if (str[i] == c)
+			i++;
 	}
-	array[i] = NULL;
-	return (array);
+	split[y] = NULL;
+	return (split);
 }

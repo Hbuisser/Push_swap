@@ -22,7 +22,7 @@
 
 # include "../utils/libft/include/libft.h"
 
-typedef struct	s_data
+typedef struct s_data
 {
 	int			i;
 	int			init_len;
@@ -38,6 +38,12 @@ typedef struct	s_data
 	int			*sorted_arr;
 	int			push;
 }				t_data;
+
+/*
+*** INIT
+*/
+
+void			init_struct(t_data *data, int argc, char **argv);
 
 /*
 *** CHECKS
@@ -63,7 +69,6 @@ int				already_in_order(t_data *data);
 *** UTILS
 */
 
-void			init_struct(t_data *data, int argc, char **argv);
 void			bring_above(t_data *data);
 void			swap(int *xp, int *yp);
 int				*get_sorted_array(int *arr, int n);
@@ -76,6 +81,7 @@ int				check_double_string(char **tab);
 void			free_tab(char **tab);
 int				free_all(t_data *data);
 void			debug(t_data *data);
+int				get_nbr_chunck(int size);
 
 /*
 *** HARD
@@ -91,11 +97,10 @@ int				hard_5(t_data *data);
 *** PUSH_ALGO
 */
 
-int				get_nbr_chunck(int size);
 int				push_algo(t_data *data);
 int				push_to_b(t_data *data);
 int				push_to_a(t_data *data);
-int				compare_with_chunk(t_data *data, int iter, int i);
+int				compare_with_chunk(t_data *data, int iter);
 int				small_bash(t_data *data);
 
 /*

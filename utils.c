@@ -14,8 +14,8 @@
 
 void	bring_above(t_data *data)
 {
-	int i;
-	int index;
+	int	i;
+	int	index;
 
 	i = 1;
 	index = 0;
@@ -33,9 +33,9 @@ void	bring_above(t_data *data)
 	}
 }
 
-int		check_digit(int argc, char **argv, int i)
+int	check_digit(int argc, char **argv, int i)
 {
-	int j;
+	int	j;
 
 	j = 0;
 	while (i < argc)
@@ -44,7 +44,7 @@ int		check_digit(int argc, char **argv, int i)
 		{
 			if (!ft_isdigit(argv[i][j]))
 			{
-				write(1, "Error\n", 6);
+				write(2, "Error\n", 6);
 				return (-1);
 			}
 			j++;
@@ -55,40 +55,37 @@ int		check_digit(int argc, char **argv, int i)
 	return (0);
 }
 
-void	init_struct(t_data *data, int argc, char **argv)
-{
-	data->i = 1;
-	data->line = ft_strdup("");
-	data->nb_chunk = 0;
-	data->len_chunk = 0;
-	data->init_len = argc - 1;
-	if (argv[1] && !ft_strncmp(argv[1], "-v", 2))
-		data->init_len -= 1;
-	data->len_b = 0;
-	data->string_bool = 0;
-}
-
 void	swap(int *xp, int *yp)
 {
-	int tmp;
+	int	tmp;
 
 	tmp = *xp;
 	*xp = *yp;
 	*yp = tmp;
 }
 
-int		*get_sorted_array(int *arr, int n)
+int	*get_tmp_arr(int *arr, int n)
 {
-	int i;
-	int j;
-	int min;
-	int *tmp_arr;
+	int	*tmp_arr;
+	int	i;
 
-	if (!(tmp_arr = (int *)malloc(sizeof(int) * n)))
+	tmp_arr = (int *)malloc(sizeof(int) * n);
+	if (!tmp_arr)
 		return (0);
 	i = -1;
 	while (++i < n)
 		tmp_arr[i] = arr[i];
+	return (tmp_arr);
+}
+
+int	*get_sorted_array(int *arr, int n)
+{
+	int	i;
+	int	j;
+	int	min;
+	int	*tmp_arr;
+
+	tmp_arr = get_tmp_arr(arr, n);
 	i = 0;
 	while (i < n - 1)
 	{
