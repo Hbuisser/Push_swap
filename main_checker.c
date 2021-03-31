@@ -96,6 +96,7 @@ int	main(int argc, char **argv)
 	int		instruct;
 	char	*line;
 
+	//line = ft_strdup("");
 	init_struct(&data, argc, argv);
 	if (check(&data, argv, argc) < 0)
 		return (1);
