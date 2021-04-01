@@ -12,11 +12,11 @@
 
 #include "../include/push_swap.h"
 
-int	check_int_min_max(char *str)
+int	check_int_min_max(t_data *data, char *str)
 {
-	if (ft_atoi_err_max(str) == -2)
+	if (ft_atoi_err_max(str) == 10000)
 	{
-		write(2, "Error\n", 6);
+		free(data->line);
 		return (-1);
 	}
 	return (1);
@@ -31,7 +31,7 @@ int	check_max(t_data *data, int nb, char **argv)
 	{
 		while (i < data->init_len)
 		{
-			if (check_int_min_max(argv[nb + i]) < 1)
+			if (check_int_min_max(data, argv[nb + i]) < 1)
 				return (-1);
 			i++;
 		}
@@ -53,6 +53,7 @@ int	check_double(t_data *data, char **argv)
 		{
 			if (!(ft_strcmp(argv[j + data->i], argv[k + data->i])))
 			{
+				free(data->line);
 				write(2, "Error\n", 6);
 				return (1);
 			}
@@ -66,7 +67,10 @@ int	check_double(t_data *data, char **argv)
 int	check(t_data *data, char **argv, int argc)
 {
 	if (argc == 1)
+	{
+		free(data->line);
 		return (-1);
+	}
 	if (!ft_strncmp(argv[1], "-v", 2))
 		data->i = 2;
 	if ((argc < 2 && data->string_bool == 0) || (argc == 2

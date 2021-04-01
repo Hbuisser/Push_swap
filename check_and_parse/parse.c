@@ -87,7 +87,7 @@ int	parse_stack_string(t_data *data, char **argv)
 	data->b = (int *)malloc(sizeof(int) * len);
 	if (!data->b)
 		return (-1);
-	if (check_digit_and_max(tab) < -1)
+	if (check_digit_max_double(tab) < 0)
 		return (-1);
 	free_tab(tab);
 	return (0);

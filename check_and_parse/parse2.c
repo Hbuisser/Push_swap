@@ -12,28 +12,63 @@
 
 #include "../include/push_swap.h"
 
-int	check_int_min_max_tab(char **tab)
+int	get_len(t_data *data, char **tab)
 {
 	int	i;
 	int	j;
 
+	data->len_a = 0;
+	i = 0;
 	j = 0;
+	while (tab[i] != NULL)
+		i++;
+	data->len_a = i;
+	return (i);
+}
+
+int	check_double_string(char **tab)
+{
+	size_t	len;
+	size_t	j;
+	size_t	k;
+
+	j = 0;
+	k = 0;
+	len = 0;
+	while (tab[len] != NULL)
+		len++;
+	while (j < len)
+	{
+		k = j + 1;
+		while (k < len)
+		{
+			if (!(ft_strncmp(tab[j], tab[k], len)))
+			{
+				write(2, "Error\n", 6);
+				return (1);
+			}
+			k++;
+		}
+		j++;
+	}
+	return (0);
+}
+
+int	check_int_min_max_tab(char **tab)
+{
+	int	i;
+
 	i = 0;
 	while (tab[i])
 	{
-		if (ft_atoi_err_max(tab[i]) == -2)
-		{
-			write(2, "Error\n", 6);
+		if (ft_atoi_err_max(tab[i]) == 10000)
 			return (-1);
-		}
 		i++;
 	}
-	if (check_double_string(tab) > 0)
-		return (-1);
 	return (1);
 }
 
-int	check_digit_and_max(char **tab)
+int	check_digit_max_double(char **tab)
 {
 	int	i;
 
@@ -52,19 +87,10 @@ int	check_digit_and_max(char **tab)
 		free_tab(tab);
 		return (-1);
 	}
+	if (check_double_string(tab) > 0)
+	{
+		free_tab(tab);
+		return (-1);
+	}
 	return (1);
-}
-
-int	get_len(t_data *data, char **tab)
-{
-	int	i;
-	int	j;
-
-	data->len_a = 0;
-	i = 0;
-	j = 0;
-	while (tab[i] != NULL)
-		i++;
-	data->len_a = i;
-	return (i);
 }

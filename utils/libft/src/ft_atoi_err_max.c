@@ -12,6 +12,12 @@
 
 #include "../include/libft.h"
 
+int	ft_error(void)
+{
+	write(2, "Error\n", 6);
+	return (10000);
+}
+
 int	ft_manage_longmin(unsigned long result, int count)
 {
 	int	value;
@@ -21,11 +27,11 @@ int	ft_manage_longmin(unsigned long result, int count)
 	else
 		value = 1;
 	if (result > 2147483648)
-		return (-2);
+		return (ft_error());
 	if (value == -1 && result > 2147483648)
-		return (-2);
+		return (ft_error());
 	else if (value == 1 && result > 2147483647)
-		return (-2);
+		return (ft_error());
 	return (result * value);
 }
 

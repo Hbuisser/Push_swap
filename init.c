@@ -23,4 +23,8 @@ void	init_struct(t_data *data, int argc, char **argv)
 		data->init_len -= 1;
 	data->len_b = 0;
 	data->string_bool = 0;
+	data->chunk_step = NULL;
+	data->sorted_arr = NULL;
+	data->a = NULL;
+	data->b = NULL;
 }

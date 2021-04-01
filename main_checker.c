@@ -38,8 +38,9 @@ int	display_result(t_data *data)
 	return (1);
 }
 
-int	print_error(void)
+int	print_error(t_data *data)
 {
+	free_all(data);
 	write(2, "Error\n", 6);
 	return (-1);
 }
@@ -69,7 +70,7 @@ int	get_instruc(t_data *data, char **instruct, int i)
 	else if (!ft_strncmp(instruct[i], "rrr", 4))
 		return (rrr(data));
 	else
-		return (print_error());
+		return (print_error(data));
 	return (1);
 }
 
@@ -83,7 +84,10 @@ int	exec_instruct(t_data *data)
 	while (instruct && instruct[i])
 	{
 		if (get_instruc(data, instruct, i) < 0)
+		{
+			free_tab(instruct);
 			return (-1);
+		}
 		i++;
 	}
 	free_tab(instruct);

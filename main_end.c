@@ -12,34 +12,6 @@
 
 #include "include/push_swap.h"
 
-int	check_double_string(char **tab)
-{
-	size_t	len;
-	size_t	j;
-	size_t	k;
-
-	j = 0;
-	k = 0;
-	len = 0;
-	while (tab[len] != NULL)
-		len++;
-	while (j < len)
-	{
-		k = j + 1;
-		while (k < len)
-		{
-			if (!(ft_strcmp(tab[j], tab[k])))
-			{
-				write(2, "Error\n", 6);
-				return (1);
-			}
-			k++;
-		}
-		j++;
-	}
-	return (0);
-}
-
 void	free_tab(char **tab)
 {
 	int	i;
