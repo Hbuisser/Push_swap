@@ -99,7 +99,7 @@ int	main(int argc, char **argv)
 	init_struct(&data, argc, argv);
 	if (check(&data, argv, argc) < 0)
 		return (1);
-	if (parse(&data, argv, argc) < 0)
+	if (parse(&data, argv) < 0)
 		return (free_all(&data));
 	while (1)
 	{

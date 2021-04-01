@@ -12,27 +12,6 @@
 
 #include "../include/push_swap.h"
 
-int	check_int_min_max_tab(char **tab)
-{
-	int	i;
-	int	j;
-
-	j = 0;
-	i = 0;
-	while (tab[i])
-	{
-		if (ft_atoi_err_max(tab[i]) == -2)
-		{
-			write(2, "Error\n", 6);
-			return (-1);
-		}
-		i++;
-	}
-	if (check_double_string(tab) > 0)
-		return (-1);
-	return (1);
-}
-
 int	check_int_min_max(char *str)
 {
 	if (ft_atoi_err_max(str) == -2)

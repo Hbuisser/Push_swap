@@ -36,6 +36,7 @@ void	bring_above(t_data *data)
 int	check_digit(char *arg)
 {
 	int	i;
+
 	i = 0;
 	if (arg && arg[i] && arg[i] == '-')
 		i++;

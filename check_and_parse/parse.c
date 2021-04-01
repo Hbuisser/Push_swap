@@ -26,7 +26,21 @@ int	already_in_order(t_data *data)
 	return (1);
 }
 
-int	parse_stack(t_data *data, char **argv, int argc)
+int	iter_check_digit(t_data *data, char **argv)
+{
+	int	i;
+
+	i = data->i;
+	while (argv[i])
+	{
+		if (check_digit(argv[i]))
+			return (-1);
+		i++;
+	}
+	return (1);
+}
+
+int	parse_stack(t_data *data, char **argv)
 {
 	int	i;
 	int	j;
@@ -47,29 +61,9 @@ int	parse_stack(t_data *data, char **argv, int argc)
 	if (!data->b)
 		return (-1);
 	ft_bzero(data->b, data->init_len);
-	i = data->i;
-	while (argv[i])
-	{
-		if (check_digit(argv[i]))
-			return (-1);
-		i++;
-	}
-	argc = 0;
+	if (iter_check_digit(data, argv) < 0)
+		return (-1);
 	return (1);
-}
-
-int	get_len(t_data *data, char **tab)
-{
-	int	i;
-	int	j;
-
-	data->len_a = 0;
-	i = 0;
-	j = 0;
-	while (tab[i] != NULL)
-		i++;
-	data->len_a = i;
-	return (i);
 }
 
 int	parse_stack_string(t_data *data, char **argv)
@@ -93,26 +87,13 @@ int	parse_stack_string(t_data *data, char **argv)
 	data->b = (int *)malloc(sizeof(int) * len);
 	if (!data->b)
 		return (-1);
-	i = 0;
-	while(tab[i])
-	{
-		if (check_digit(tab[i]))
-		{
-			free_tab(tab);
-			return (-1);
-		}
-		i++;
-	}
-	if (check_int_min_max_tab(tab) < 1)
-	{
-		free_tab(tab);
+	if (check_digit_and_max(tab) < -1)
 		return (-1);
-	}
 	free_tab(tab);
 	return (0);
 }
 
-int	parse(t_data *data, char **argv, int argc)
+int	parse(t_data *data, char **argv)
 {
 	int	i;
 
@@ -128,7 +109,7 @@ int	parse(t_data *data, char **argv, int argc)
 		i++;
 	}
 	if (data->string_bool < 1)
-		if (parse_stack(data, argv, argc) < 0)
+		if (parse_stack(data, argv) < 0)
 			return (-1);
 	data->nb_chunk = get_nbr_chunck(data->len_a);
 	data->sorted_arr = get_sorted_array(data->a, data->len_a);

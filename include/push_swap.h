@@ -53,7 +53,6 @@ int				free_line(t_data *data);
 int				check_double(t_data *data, char **argv);
 int				check_digit(char *arg);
 int				check_int_min_max(char *str);
-int				check_int_min_max_tab(char **tab);
 int				check_max(t_data *data, int nb, char **argv);
 int				check(t_data *data, char **argv, int argc);
 
@@ -61,10 +60,13 @@ int				check(t_data *data, char **argv, int argc);
 *** PARSE
 */
 
-int				parse(t_data *data, char **argv, int argc);
+int				parse(t_data *data, char **argv);
 int				parse_stack_string(t_data *data, char **argv);
-int				parse_stack(t_data *data, char **argv, int argc);
+int				parse_stack(t_data *data, char **argv);
 int				already_in_order(t_data *data);
+int				check_digit_and_max(char **tab);
+int				get_len(t_data *data, char **tab);
+int				check_int_min_max_tab(char **tab);
 
 /*
 *** UTILS

@@ -18,6 +18,7 @@ SRCS_CHECKER = main_checker.c \
 	instructions/reverse.c \
 	check_and_parse/check.c \
 	check_and_parse/parse.c \
+	check_and_parse/parse2.c \
 	main_end.c \
 	utils.c \
 		
@@ -33,6 +34,7 @@ SRCS_PUSH = main_push.c \
 	instructions/reverse.c \
 	check_and_parse/check.c \
 	check_and_parse/parse.c \
+	check_and_parse/parse2.c \
 	main_end.c \
 	hard.c \
 	utils.c \

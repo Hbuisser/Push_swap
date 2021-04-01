@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_push.c                                        :+:      :+:    :+:   */
+/*   parse2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hbuisser <hbuisser@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,44 +10,61 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "include/push_swap.h"
+#include "../include/push_swap.h"
 
-int	small_bash(t_data *data)
+int	check_int_min_max_tab(char **tab)
 {
-	int	tmp;
+	int	i;
+	int	j;
 
-	tmp = 0;
-	if (data->len_a == 2)
-		hard_2(data);
-	else if (data->len_a == 3)
-		hard_3(data);
-	else if (data->len_a == 4)
-		hard_4(data);
-	else if (data->len_a == 5)
-		hard_5(data);
-	return (0);
+	j = 0;
+	i = 0;
+	while (tab[i])
+	{
+		if (ft_atoi_err_max(tab[i]) == -2)
+		{
+			write(2, "Error\n", 6);
+			return (-1);
+		}
+		i++;
+	}
+	if (check_double_string(tab) > 0)
+		return (-1);
+	return (1);
 }
 
-int	main(int argc, char **argv)
+int	check_digit_and_max(char **tab)
 {
-	t_data	data;
+	int	i;
 
-	init_struct(&data, argc, argv);
-	if (check(&data, argv, argc) < 0)
-		return (1);
-	if (parse(&data, argv) < 0)
-		return (free_all(&data));
-	if (already_in_order(&data) > 0)
-		return (free_all(&data));
-	if (data.len_a < 6)
-		small_bash(&data);
-	else
+	i = 0;
+	while (tab[i])
 	{
-		if (push_algo(&data) < 0)
-			return (0);
+		if (check_digit(tab[i]))
+		{
+			free_tab(tab);
+			return (-1);
+		}
+		i++;
 	}
-	if (!ft_strncmp(argv[1], "-v", 2))
-		debug(&data);
-	free_all(&data);
+	if (check_int_min_max_tab(tab) < 1)
+	{
+		free_tab(tab);
+		return (-1);
+	}
 	return (1);
+}
+
+int	get_len(t_data *data, char **tab)
+{
+	int	i;
+	int	j;
+
+	data->len_a = 0;
+	i = 0;
+	j = 0;
+	while (tab[i] != NULL)
+		i++;
+	data->len_a = i;
+	return (i);
 }
