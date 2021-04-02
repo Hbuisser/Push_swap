@@ -75,7 +75,10 @@ int	check(t_data *data, char **argv, int argc)
 		data->i = 2;
 	if ((argc < 2 && data->string_bool == 0) || (argc == 2
 			&& (!ft_strncmp(argv[1], "-v", 2) && data->string_bool == 0)))
+	{
+		write(2, "Error\n", 6);
 		return (-1);
+	}
 	if (check_double(data, argv) > 0)
 		return (-1);
 	if (check_max(data, data->i, argv) < 0)
